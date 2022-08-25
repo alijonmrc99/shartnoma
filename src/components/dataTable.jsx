@@ -60,7 +60,14 @@ export default function DataTables() {
     },
     {
       name: "someThing",
-      selector: () => <Button onClick={handleButtonClick}>Action</Button>,
+      selector: () => (
+        <div>
+          <Button onClick={handleButtonClick}>Action</Button>{" "}
+          <Button variant="danger" onClick={handleButtonClick}>
+            Action
+          </Button>
+        </div>
+      ),
     },
   ];
 
