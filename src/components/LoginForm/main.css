@@ -1,0 +1,23 @@
+.login {
+  background-color: #367fa9;
+  width: 100%;
+  height: 100vh;
+}
+
+.form-cont {
+  width: 50%;
+  background-color: #ffffff;
+  /* border-radius: 15px; */
+}
+
+.form-cont button {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .form-cont {
+    width: 100%;
+    /* height: 100%; */
+    /* border-radius: 0; */
+  }
+}

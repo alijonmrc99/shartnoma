@@ -1,11 +1,10 @@
-import "./App.css";
 import { Outlet } from "react-router-dom";
-function App() {
+function Protected() {
   return (
-    <div className="App">
+    <div>
       <Outlet />
     </div>
   );
 }
 
-export default App;
+export default Protected;

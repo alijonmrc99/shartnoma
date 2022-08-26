@@ -29,17 +29,19 @@ export default function Header({ username = "Alijon Kuvondikov N" }) {
   }
 
   return (
-    <div className="header py-2 shadow">
-      <div className="container-xxl d-flex justify-content-between align-items-center">
+    <div className="header  py-2">
+      <div className=" px-3 d-flex justify-content-between align-items-center">
         <div className="d-flex  align-items-center">
           <div className="me-4">
-            <button onClick={handleOpen} className="menu-btn">
-              <i className="bi bi-list"></i>
-            </button>
+            <div
+              onClick={handleOpen}
+              className="menu-btn d-flex align-items-center justify-content-center"
+            >
+              <i className="bi bi-list text-black"></i>
+            </div>
           </div>
           <div className="logo d-flex align-items-center ">
             {/* <img src={logo} width="53" height="53" alt="logo" /> */}
-            <h1 className="ms-3 mb-0">Ijro Samdu</h1>
           </div>
         </div>
         <div
