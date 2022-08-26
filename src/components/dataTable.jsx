@@ -16,7 +16,7 @@ export default function DataTables() {
     }));
 
     config.sheet.data.push(header);
-
+    console.log(1);
     data.forEach((item) => {
       const rowOne = [
         {
