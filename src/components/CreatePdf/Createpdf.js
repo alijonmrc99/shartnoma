@@ -18,7 +18,7 @@ function CreatePdf(...data) {
 
   let pageHeight = doc.internal.pageSize.height,
     pageWidth = doc.internal.pageSize.getWidth(),
-    lineHeight = 1.5,
+    lineHeight = 1.2,
     margin = 28.34,
     maxLineWidth = pageWidth - margin * 2,
     fontSize = 12,
@@ -86,31 +86,41 @@ function CreatePdf(...data) {
       );
 
     const Xaxis = text.align === "center" ? pageWidth / 2 : margin;
-    console.log(text.align ? text.align : "justify");
+
     doc.internal.write(0, "Tw");
     doc.text(textLines, Xaxis, verticalOffset, {
       maxWidth: maxLineWidth,
-      align: "justify",
+      align: text.align ? text.align : "justify",
     });
 
     verticalOffset += textLines.length * fontSize * lineHeight;
   }
 
   function drawTable(tableData) {
-    const contData = tableData.map((item, index) => [
-      index + 1,
-      item.td2,
-      item.td3,
-      item.td4,
-    ]);
+    console.log(tableData);
+    // const contData = tableData?.map((item, index) => [
+    //   index + 1,
+    //   item.speciallize,
+    //   item.interval,
+    //   item.total,
+    //   item.summa,
+    // ]);
 
-    const headers = [["№", "F.I.SH", "Kursi", "Guruhi"]];
+    const headers = [
+      [
+        "№",
+        "Ta’lim yunalishi va mutaxassisligi",
+        "Davomiyligi",
+        "Tinglovchilar soni",
+        "Umumiy summa",
+      ],
+    ];
 
     const content = {
       startY: verticalOffset - 10,
       theme: "plain",
       head: headers,
-      body: contData,
+      body: tableData,
       font: "times new roman",
       margin: 0,
       rowPageBreak: "avoid",
