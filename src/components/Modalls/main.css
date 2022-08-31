@@ -1,0 +1,19 @@
+.modal-content {
+  border: none;
+  border-radius: 0;
+}
+
+.modal-header {
+  background-color: #3c8dbc !important;
+  color: #f1f1f1;
+  border-radius: inherit;
+}
+
+.modal-title {
+  font-size: 18px;
+}
+
+.modal-footer {
+  border-bottom: 3px solid #00a65a !important;
+  border-radius: inherit;
+}

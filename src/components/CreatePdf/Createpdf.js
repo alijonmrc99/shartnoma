@@ -1,11 +1,17 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 // import gerb from "../../img/gerb.png";
-import { font, fontBold } from "./font";
+import { font, fontBold, fontItalic } from "./font";
 function CreatePdf(...data) {
   const callAddFont = function () {
     this.addFileToVFS("times new roman bold-normal.ttf", fontBold);
     this.addFont("times new roman bold-normal.ttf", "times new roman", "bold");
+    this.addFileToVFS("times new roman italic-italic.ttf", fontItalic);
+    this.addFont(
+      "times new roman italic-italic.ttf",
+      "times new roman",
+      "italic"
+    );
     this.addFileToVFS("times new roman-normal.ttf", font);
     this.addFont("times new roman-normal.ttf", "times new roman", "normal");
   };
@@ -52,9 +58,9 @@ function CreatePdf(...data) {
   //   );
 
   data.forEach((item) => {
-    if (verticalOffset >= pageHeight) {
+    if (verticalOffset >= pageHeight - 7 * oneLineHeight) {
       doc.addPage();
-      verticalOffset = oneLineHeight; // Restart height position
+      verticalOffset = 3 * oneLineHeight; // Restart height position
     }
     if (item.name === "header") {
       header(item);
@@ -77,27 +83,52 @@ function CreatePdf(...data) {
   }
 
   function addText(text) {
-    var textLines = doc
-      .setFont("times new roman", text.weight)
-      .setFontSize(fontSize)
-      .splitTextToSize(
-        text.text,
-        text.width ? maxLineWidth / text.width : maxLineWidth
-      );
+    let endoOfXOfset = margin;
+    if (text.data) {
+      text.data.forEach((item, index) => {
+        let beginOfXOfset = endoOfXOfset + doc.getTextWidth(" ");
+        endoOfXOfset += doc.getTextWidth(item);
+        if (index !== 2 && index !== 4)
+          doc.line(beginOfXOfset, verticalOffset, endoOfXOfset, verticalOffset);
+      });
+    }
 
-    const Xaxis = text.align === "center" ? pageWidth / 2 : margin;
+    var textLines = "";
+    text.style
+      ? (textLines = doc
+          .setFont("times new roman", text.style)
+          .setFontSize(fontSize)
+          .splitTextToSize(
+            text.text,
+            text.width ? maxLineWidth / 2 : maxLineWidth
+          ))
+      : (textLines = doc
+          .setFont("times new roman", text.weight)
+          .setFontSize(fontSize)
+          .splitTextToSize(
+            text.text,
+            text.width ? maxLineWidth / 2 : maxLineWidth
+          ));
 
-    doc.internal.write(0, "Tw");
+    let Xaxis = text.align === "center" ? pageWidth / 2 : margin;
+    text.width === 5 && (Xaxis = maxLineWidth / 4);
+    text.width === 6 && (Xaxis = (maxLineWidth * 3) / 4);
+    text.width === 3 && (Xaxis = (maxLineWidth / 2) * 1.1);
+
+    // underline texts
+
     doc.text(textLines, Xaxis, verticalOffset, {
-      maxWidth: maxLineWidth,
+      // maxWidth: maxLineWidth,
       align: text.align ? text.align : "justify",
     });
 
-    verticalOffset += textLines.length * fontSize * lineHeight;
+    text.width !== 5 &&
+      text.width !== 2 &&
+      (verticalOffset += textLines.length * fontSize * lineHeight);
   }
 
   function drawTable(tableData) {
-    console.log(tableData);
+    // console.log(tableData);
     // const contData = tableData?.map((item, index) => [
     //   index + 1,
     //   item.speciallize,

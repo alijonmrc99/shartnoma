@@ -9,7 +9,6 @@ export default function Header({ username = "Alijon Kuvondikov N" }) {
   // const [, , removeCookie] = useCookies();
   const dispatch = useDispatch();
   const menu = useSelector((state) => state.menu);
-  console.log(menu);
   let name = "";
   let notUserImg = "";
   if (username !== undefined) {

@@ -14,8 +14,14 @@ h3 {
 }
 
 input,
-button {
+button,
+select {
   border-radius: 0 !important;
+}
+
+a {
+  color: #f1f1f1 !important;
+  text-decoration: none !important;
 }
 
 .peremium-btn {
