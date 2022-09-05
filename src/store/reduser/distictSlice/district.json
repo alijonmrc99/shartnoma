@@ -17,22 +17,22 @@
   {
     "id": "18",
     "region_id": "1",
-    "name": "Qonliko�l tumani"
+    "name": "Qonliko'l tumani"
   },
   {
     "id": "19",
     "region_id": "1",
-    "name": "Qorao�zak tumani"
+    "name": "Qorao'zak tumani"
   },
   {
     "id": "20",
     "region_id": "1",
-    "name": "Qo�ng�irot tumani"
+    "name": "Qo'ng'irot tumani"
   },
   {
     "id": "21",
     "region_id": "1",
-    "name": "Mo�ynoq tumani"
+    "name": "Mo'ynoq tumani"
   },
   {
     "id": "22",
@@ -47,17 +47,17 @@
   {
     "id": "24",
     "region_id": "1",
-    "name": "Taxtako�pir tumani"
+    "name": "Taxtako'pir tumani"
   },
   {
     "id": "25",
     "region_id": "1",
-    "name": "To�rtko�l tumani"
+    "name": "To'rtko'l tumani"
   },
   {
     "id": "26",
     "region_id": "1",
-    "name": "Xo�jayli tumani"
+    "name": "Xo'jayli tumani"
   },
   {
     "id": "27",
@@ -72,7 +72,7 @@
   {
     "id": "29",
     "region_id": "1",
-    "name": "Ellikqal�a tumani"
+    "name": "Ellikqal'a tumani"
   },
   {
     "id": "30",
@@ -102,7 +102,7 @@
   {
     "id": "35",
     "region_id": "2",
-    "name": "Bo�z tumani"
+    "name": "Bo'z tumani"
   },
   {
     "id": "36",
@@ -122,7 +122,7 @@
   {
     "id": "39",
     "region_id": "2",
-    "name": "Qo�rg�ontepa tumani"
+    "name": "Qo'rg'ontepa tumani"
   },
   {
     "id": "40",
@@ -132,7 +132,7 @@
   {
     "id": "41",
     "region_id": "2",
-    "name": "Oltinko�l tumani"
+    "name": "Oltinko'l tumani"
   },
   {
     "id": "42",
@@ -142,7 +142,7 @@
   {
     "id": "43",
     "region_id": "2",
-    "name": "Ulug�nor tumani"
+    "name": "Ulug'nor tumani"
   },
   {
     "id": "44",
@@ -152,7 +152,7 @@
   {
     "id": "45",
     "region_id": "2",
-    "name": "Xo�jaobod tumani"
+    "name": "Xo'jaobod tumani"
   },
   {
     "id": "46",
@@ -177,7 +177,7 @@
   {
     "id": "50",
     "region_id": "3",
-    "name": "G�ijduvon tumani"
+    "name": "G'ijduvon tumani"
   },
   {
     "id": "51",
@@ -197,7 +197,7 @@
   {
     "id": "54",
     "region_id": "3",
-    "name": "Qorako�l tumani"
+    "name": "Qorako'l tumani"
   },
   {
     "id": "55",
@@ -237,12 +237,12 @@
   {
     "id": "62",
     "region_id": "4",
-    "name": "G�allaorol tumani"
+    "name": "G'allaorol tumani"
   },
   {
     "id": "63",
     "region_id": "4",
-    "name": "Do�stlik tumani"
+    "name": "Do'stlik tumani"
   },
   {
     "id": "64",
@@ -272,7 +272,7 @@
   {
     "id": "69",
     "region_id": "4",
-    "name": "Mirzacho�l tumani"
+    "name": "Mirzacho'l tumani"
   },
   {
     "id": "70",
@@ -292,7 +292,7 @@
   {
     "id": "73",
     "region_id": "5",
-    "name": "G�uzor tumani"
+    "name": "G'uzor tumani"
   },
   {
     "id": "74",
@@ -357,7 +357,7 @@
   {
     "id": "86",
     "region_id": "5",
-    "name": "Yakkabog� tumani"
+    "name": "Yakkabog' tumani"
   },
   {
     "id": "87",
@@ -442,7 +442,7 @@
   {
     "id": "103",
     "region_id": "7",
-    "name": "To�raqo�rg�on tumani"
+    "name": "To'raqo'rg'on tumani"
   },
   {
     "id": "104",
@@ -452,7 +452,7 @@
   {
     "id": "105",
     "region_id": "7",
-    "name": "Uchqo�rg�on tumani"
+    "name": "Uchqo'rg'on tumani"
   },
   {
     "id": "106",
@@ -467,12 +467,12 @@
   {
     "id": "108",
     "region_id": "7",
-    "name": "Yangiqo�rg�on tumani"
+    "name": "Yangiqo'rg'on tumani"
   },
   {
     "id": "109",
     "region_id": "8",
-    "name": "Bulung�ur tumani"
+    "name": "Bulung'ur tumani"
   },
   {
     "id": "110",
@@ -487,17 +487,17 @@
   {
     "id": "112",
     "region_id": "8",
-    "name": "Kattaqo�rg�on tumani"
+    "name": "Kattaqo'rg'on tumani"
   },
   {
     "id": "113",
     "region_id": "8",
-    "name": "Kattaqo�rg�on shahri"
+    "name": "Kattaqo'rg'on shahri"
   },
   {
     "id": "114",
     "region_id": "8",
-    "name": "Qo�shrabot tumani"
+    "name": "Qo'shrabot tumani"
   },
   {
     "id": "115",
@@ -522,7 +522,7 @@
   {
     "id": "119",
     "region_id": "8",
-    "name": "Pastarg�om tumani"
+    "name": "Pastarg'om tumani"
   },
   {
     "id": "120",
@@ -567,7 +567,7 @@
   {
     "id": "128",
     "region_id": "9",
-    "name": "Jarqo�rg�on tumani"
+    "name": "Jarqo'rg'on tumani"
   },
   {
     "id": "129",
@@ -577,7 +577,7 @@
   {
     "id": "130",
     "region_id": "9",
-    "name": "Qo�mqo�rg�on tumani"
+    "name": "Qo'mqo'rg'on tumani"
   },
   {
     "id": "131",
@@ -617,7 +617,7 @@
   {
     "id": "138",
     "region_id": "9",
-    "name": "Sho�rchi tumani"
+    "name": "Sho'rchi tumani"
   },
   {
     "id": "139",
@@ -692,12 +692,12 @@
   {
     "id": "153",
     "region_id": "11",
-    "name": "Bo�ka tumani"
+    "name": "Bo'ka tumani"
   },
   {
     "id": "154",
     "region_id": "11",
-    "name": "Bo�stonliq tumani"
+    "name": "Bo'stonliq tumani"
   },
   {
     "id": "155",
@@ -717,7 +717,7 @@
   {
     "id": "158",
     "region_id": "11",
-    "name": "Oqqo�rg�on tumani"
+    "name": "Oqqo'rg'on tumani"
   },
   {
     "id": "159",
@@ -742,7 +742,7 @@
   {
     "id": "163",
     "region_id": "11",
-    "name": "O�rtachirchiq tumani"
+    "name": "O'rtachirchiq tumani"
   },
   {
     "id": "164",
@@ -762,7 +762,7 @@
   {
     "id": "167",
     "region_id": "11",
-    "name": "Yangiyo�l tumani"
+    "name": "Yangiyo'l tumani"
   },
   {
     "id": "168",
@@ -772,7 +772,7 @@
   {
     "id": "169",
     "region_id": "12",
-    "name": "Bog�dod tumani"
+    "name": "Bog'dod tumani"
   },
   {
     "id": "170",
@@ -782,7 +782,7 @@
   {
     "id": "171",
     "region_id": "12",
-    "name": "Dang�ara tumani"
+    "name": "Dang'ara tumani"
   },
   {
     "id": "172",
@@ -802,17 +802,17 @@
   {
     "id": "175",
     "region_id": "12",
-    "name": "Qo�qon shahri"
+    "name": "Qo'qon shahri"
   },
   {
     "id": "176",
     "region_id": "12",
-    "name": "Qo�shtepa tumani"
+    "name": "Qo'shtepa tumani"
   },
   {
     "id": "177",
     "region_id": "12",
-    "name": "Marg�ilon shahri"
+    "name": "Marg'ilon shahri"
   },
   {
     "id": "178",
@@ -827,7 +827,7 @@
   {
     "id": "180",
     "region_id": "12",
-    "name": "So�x tumani"
+    "name": "So'x tumani"
   },
   {
     "id": "181",
@@ -837,22 +837,22 @@
   {
     "id": "182",
     "region_id": "12",
-    "name": "Uchko�prik tumani"
+    "name": "Uchko'prik tumani"
   },
   {
     "id": "183",
     "region_id": "12",
-    "name": "O�zbekiston tumani"
+    "name": "O'zbekiston tumani"
   },
   {
     "id": "184",
     "region_id": "12",
-    "name": "Farg�ona tumani"
+    "name": "Farg'ona tumani"
   },
   {
     "id": "185",
     "region_id": "12",
-    "name": "Farg�ona shahri"
+    "name": "Farg'ona shahri"
   },
   {
     "id": "186",
@@ -862,7 +862,7 @@
   {
     "id": "187",
     "region_id": "13",
-    "name": "Bog�ot tumani"
+    "name": "Bog'ot tumani"
   },
   {
     "id": "188",
@@ -872,7 +872,7 @@
   {
     "id": "189",
     "region_id": "13",
-    "name": "Qo�shko�pir tumani"
+    "name": "Qo'shko'pir tumani"
   },
   {
     "id": "190",
@@ -992,7 +992,7 @@
   {
     "id": "213",
     "region_id": "11",
-    "name": "Yangiyo�l shahri"
+    "name": "Yangiyo'l shahri"
   },
   {
     "id": "215",
@@ -1027,7 +1027,7 @@
   {
     "id": "221",
     "region_id": "6",
-    "name": "G�ozg�on shahri"
+    "name": "G'ozg'on shahri"
   },
   {
     "id": "222",

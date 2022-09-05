@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./main.css";
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { modalToggle } from "../../store/reduser/menu/menuSlice";
-import store from "../../store/store";
 
-function UserActions({ user }) {
+function UserActions() {
   const show = useSelector((state) => state.menu.modalTogler);
   const regions = useSelector((store) => store.regions);
   const district = useSelector((store) => store.district);
+  const initialData = useSelector((store) => store.user);
 
-  // const [show, setShow] = useState(false);
+  const [user, setUser] = useState(initialData);
   const dispatch = useDispatch();
   const handleClose = () => dispatch(modalToggle(false));
+
+  function handleChange(e) {
+    let attributes = user.attributes;
+    attributes = {
+      ...attributes,
+      [e.target.name]: e.target.value,
+    };
+
+    setUser({
+      id: user.id,
+      attributes,
+    });
+  }
+
+  function handleSubmit(e) {
+    console.log(user);
+    e.preventDefault();
+  }
 
   return (
     <>
@@ -26,7 +44,7 @@ function UserActions({ user }) {
         centered
         aria-labelledby="contained-modal-title-vcenter"
       >
-        <form>
+        <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
             <Modal.Title>Yangi student qo'shish</Modal.Title>
           </Modal.Header>
@@ -40,38 +58,58 @@ function UserActions({ user }) {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label>Ismi</Form.Label>
-                    <Form.Control type="text" name="fname" />
+                    <Form.Control
+                      onChange={handleChange}
+                      type="text"
+                      name="First_name"
+                    />
                   </Form.Group>
+                  {/* Lastname input area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput3"
                   >
                     <Form.Label>Familyasi</Form.Label>
-                    <Form.Control type="text" name="lname" />
+                    <Form.Control
+                      onChange={handleChange}
+                      type="text"
+                      name="Last_name"
+                    />
                   </Form.Group>
+                  {/* Middlename input area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput5"
                   >
                     <Form.Label>Otasining ismi</Form.Label>
-                    <Form.Control type="text" name="passportNumber" />
+                    <Form.Control
+                      onChange={handleChange}
+                      type="text"
+                      name="Fathers_name"
+                    />
                   </Form.Group>
+                  {/* Passport number input area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput5"
                   >
                     <Form.Label>Passport raqami</Form.Label>
-                    <Form.Control type="text" name="passportNumber" />
+                    <Form.Control
+                      onChange={handleChange}
+                      type="text"
+                      name="passport"
+                    />
                   </Form.Group>
                 </Col>
-                {/* Region select area */}
                 <Col>
+                  {/* Region select area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput2"
                   >
                     <Form.Label>Viloyati</Form.Label>
                     <Form.Select
+                      onChange={handleChange}
                       name="region"
                       aria-label="Default select example"
                     >
@@ -83,12 +121,17 @@ function UserActions({ user }) {
                       ))}
                     </Form.Select>
                   </Form.Group>
+                  {/* District select area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput4"
                   >
                     <Form.Label>Tumani</Form.Label>
-                    <Form.Select aria-label="Default select example">
+                    <Form.Select
+                      onChange={handleChange}
+                      name="district"
+                      aria-label="Default select example"
+                    >
                       <option>Tumanni tanlang</option>
                       {district.map((district) => (
                         <option value={district.id} key={district.id}>
@@ -97,6 +140,7 @@ function UserActions({ user }) {
                       ))}
                     </Form.Select>
                   </Form.Group>
+                  {/* Phone number input area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput5"
@@ -104,20 +148,14 @@ function UserActions({ user }) {
                     <Form.Label>Telefon raqami</Form.Label>
                     <InputGroup>
                       <InputGroup.Text id="basic-addon1">+998</InputGroup.Text>
-                      <Form.Control type="text" name="passportNumber" />
+                      <Form.Control
+                        onChange={handleChange}
+                        type="text"
+                        name="phone"
+                      />
                     </InputGroup>
                   </Form.Group>
                 </Col>
-                {/* Lastname input area */}
-
-                {/* District select area */}
-                <Col></Col>
-                {/* Middlename input area */}
-                <Col></Col>
-                {/* Phone number input area */}
-                <Col></Col>
-                {/* Passport number input area */}
-                <Col></Col>
               </Row>
               <div></div>
             </Container>
