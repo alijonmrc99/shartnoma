@@ -6,7 +6,7 @@ import { exitToggle, menuToggle } from "../../store/reduser/menu/menuSlice";
 import { Cookies, useCookies } from "react-cookie";
 
 export default function Header({ username = "Alijon Kuvondikov N" }) {
-  // const [, , removeCookie] = useCookies();
+  const [, , removeCookie] = useCookies();
   const dispatch = useDispatch();
   const menu = useSelector((state) => state.menu);
   let name = "";
@@ -24,7 +24,8 @@ export default function Header({ username = "Alijon Kuvondikov N" }) {
   }
 
   function userLogOut() {
-    // removeCookie("userToken");
+    console.log(1);
+    removeCookie("userToken");
   }
 
   return (

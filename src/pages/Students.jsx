@@ -8,6 +8,7 @@ import UserActions from "../components/Modalls/Modal";
 import { useDispatch } from "react-redux";
 import { modalToggle } from "../store/reduser/menu/menuSlice";
 import data from "../store/reduser/data.json";
+import { defaultUser } from "../store/reduser/user/userSlice";
 
 function Students() {
   const dispatch = useDispatch();
@@ -61,7 +62,10 @@ function Students() {
   const notify = () => {
     toast.success("Malumot saqlandi");
   };
-  const handleShow = () => dispatch(modalToggle(true));
+  const handleShow = () => {
+    dispatch(modalToggle(true));
+    dispatch(defaultUser());
+  };
   return (
     <div>
       <h2 className="border-bottom mb-2">Talabalar ro'yaxti</h2>

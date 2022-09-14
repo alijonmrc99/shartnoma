@@ -4,16 +4,22 @@ import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { modalToggle } from "../../store/reduser/menu/menuSlice";
+import { useEffect } from "react";
 
 function UserActions() {
   const show = useSelector((state) => state.menu.modalTogler);
   const regions = useSelector((store) => store.regions);
   const district = useSelector((store) => store.district);
   const initialData = useSelector((store) => store.user);
-
   const [user, setUser] = useState(initialData);
+
   const dispatch = useDispatch();
   const handleClose = () => dispatch(modalToggle(false));
+
+  useEffect(() => {
+    console.log(user.attributes.First_name);
+    setUser(initialData);
+  }, [initialData]);
 
   function handleChange(e) {
     let attributes = user.attributes;
@@ -29,8 +35,8 @@ function UserActions() {
   }
 
   function handleSubmit(e) {
-    console.log(user);
     e.preventDefault();
+    console.log(user);
   }
 
   return (
@@ -62,6 +68,7 @@ function UserActions() {
                       onChange={handleChange}
                       type="text"
                       name="First_name"
+                      value={user.attributes.First_name}
                     />
                   </Form.Group>
                   {/* Lastname input area */}
@@ -74,6 +81,7 @@ function UserActions() {
                       onChange={handleChange}
                       type="text"
                       name="Last_name"
+                      value={user.attributes.Last_name}
                     />
                   </Form.Group>
                   {/* Middlename input area */}
@@ -84,6 +92,7 @@ function UserActions() {
                     <Form.Label>Otasining ismi</Form.Label>
                     <Form.Control
                       onChange={handleChange}
+                      value={user.attributes.Fathers_name}
                       type="text"
                       name="Fathers_name"
                     />
@@ -97,6 +106,7 @@ function UserActions() {
                     <Form.Control
                       onChange={handleChange}
                       type="text"
+                      value={user.attributes.passport}
                       name="passport"
                     />
                   </Form.Group>
@@ -111,6 +121,7 @@ function UserActions() {
                     <Form.Select
                       onChange={handleChange}
                       name="region"
+                      value={user.attributes.region}
                       aria-label="Default select example"
                     >
                       <option>Viloyati tanlang</option>
@@ -130,9 +141,10 @@ function UserActions() {
                     <Form.Select
                       onChange={handleChange}
                       name="district"
+                      value={user.attributes.district}
                       aria-label="Default select example"
                     >
-                      <option>Tumanni tanlang</option>
+                      <option value="0">Tumanni tanlang</option>
                       {district.map((district) => (
                         <option value={district.id} key={district.id}>
                           {district.name}
@@ -149,6 +161,7 @@ function UserActions() {
                     <InputGroup>
                       <InputGroup.Text id="basic-addon1">+998</InputGroup.Text>
                       <Form.Control
+                        value={user.attributes.phone}
                         onChange={handleChange}
                         type="text"
                         name="phone"

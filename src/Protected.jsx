@@ -1,10 +1,8 @@
-import { Outlet } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Navigate, Outlet } from "react-router-dom";
 function Protected() {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  const [cookie] = useCookies();
+  return <>{cookie.userToken ? <Outlet /> : <Navigate to="/login" />}</>;
 }
 
 export default Protected;

@@ -1,11 +1,8 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Navigate, Outlet } from "react-router-dom";
 function Public() {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  const [cookie] = useCookies();
+  return <>{!cookie.userToken ? <Outlet /> : <Navigate to={"/home"} />}</>;
 }
 
 export default Public;

@@ -3,13 +3,17 @@ import { Button } from "react-bootstrap";
 import ConfirmModal from "../Modalls/ConfirmModal";
 import { useDispatch, useSelector } from "react-redux";
 import { modalToggle } from "../../store/reduser/menu/menuSlice";
+import { selectedUser } from "../../store/reduser/user/userSlice";
 import data from "../../store/reduser/data.json";
+
 export default function DataTables() {
   const regions = useSelector((store) => store.regions);
   const district = useSelector((store) => store.district);
   const dispatch = useDispatch();
 
   const handleShow = (e) => {
+    dispatch(selectedUser(data.find((user) => user.id == e.currentTarget.id)));
+
     dispatch(modalToggle(true));
   };
 
