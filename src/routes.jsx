@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import Public from "./public";
 import Home from "./components/Home/Home";
 import Students from "./pages/Students";
+import ContractTypes from "./pages/contractTypes";
+
 function Router() {
   return (
     <Routes>
@@ -14,6 +16,7 @@ function Router() {
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />
           <Route path="students" element={<Students />} />
+          <Route path="contacts" element={<ContractTypes />} />
         </Route>
       </Route>
       <Route path="login" element={<Public />}>

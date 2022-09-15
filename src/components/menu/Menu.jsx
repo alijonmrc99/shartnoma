@@ -27,6 +27,11 @@ function Menu() {
           </Link>
         </li>
         <li>
+          <Link to="contacts">
+            <i className="bi me-2 bi-file-earmark-medical-fill"></i>Yo'nalishlar
+          </Link>
+        </li>
+        <li>
           <Link to="conracts">
             <i className="bi me-2 bi-pie-chart-fill"></i>To'lov monitoring
           </Link>

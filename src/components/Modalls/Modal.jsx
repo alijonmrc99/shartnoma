@@ -17,7 +17,7 @@ function UserActions() {
   const handleClose = () => dispatch(modalToggle(false));
 
   useEffect(() => {
-    console.log(user.attributes.First_name);
+    // console.log(user.attributes.First_name);
     setUser(initialData);
   }, [initialData]);
 

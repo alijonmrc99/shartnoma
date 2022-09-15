@@ -1,73 +1,8 @@
 import DataTable from "react-data-table-component";
-import { Button } from "react-bootstrap";
-import ConfirmModal from "../Modalls/ConfirmModal";
 import { useDispatch, useSelector } from "react-redux";
-import { modalToggle } from "../../store/reduser/menu/menuSlice";
-import { selectedUser } from "../../store/reduser/user/userSlice";
-import data from "../../store/reduser/data.json";
 
-export default function DataTables() {
-  const regions = useSelector((store) => store.regions);
-  const district = useSelector((store) => store.district);
+export default function DataTables({ columns, data }) {
   const dispatch = useDispatch();
-
-  const handleShow = (e) => {
-    dispatch(selectedUser(data.find((user) => user.id == e.currentTarget.id)));
-
-    dispatch(modalToggle(true));
-  };
-
-  const columns = [
-    {
-      name: "#",
-      selector: (row) => row.id,
-      sortable: true,
-      width: "4rem",
-    },
-    {
-      name: "F.I.SH",
-      selector: (row) =>
-        row.attributes.First_name +
-        " " +
-        row.attributes.Last_name +
-        " " +
-        row.attributes.Fathers_name,
-      sortable: true,
-      width: "250px",
-    },
-    {
-      name: "Telfon raqami",
-      selector: (row) => row.attributes.phone,
-    },
-    {
-      name: "Passport raqami",
-      selector: (row) => row.attributes.passport,
-    },
-
-    {
-      name: "Viloati",
-      selector: (row) =>
-        regions.find((item) => item.id == row.attributes.region).name,
-    },
-    {
-      name: "Tumani",
-      selector: (row) =>
-        district.find((item) => item.id == row.attributes.district).name,
-    },
-
-    {
-      name: "Harakatlar",
-      width: "130px",
-      selector: (row) => (
-        <div>
-          <Button id={row.id} onClick={handleShow} className="success-btn">
-            <i className="bi bi-pencil-fill" />
-          </Button>{" "}
-          <ConfirmModal />
-        </div>
-      ),
-    },
-  ];
 
   const conditionalRowStyles = [
     {
