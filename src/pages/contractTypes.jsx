@@ -1,27 +1,39 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
-import UserActions from "../components/Modalls/Modal";
+import ContractModal from "../components/Modalls/contractModal";
 import DataTables from "../components/table/dataTable";
 import ToastMsg from "../components/toasts/ToastMsg";
-import { getContracts } from "../store/reduser/contracts/contract";
-import { modalToggle } from "../store/reduser/menu/menuSlice";
+import {
+  defaultContr,
+  selectedContr,
+} from "../store/reduser/contracts/contractSlice";
+import { getContracts } from "../store/reduser/contracts/getcontractSlice";
+import { contractModalToggle } from "../store/reduser/menu/menuSlice";
 
 function ContractTypes() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-  const contracts = useSelector((store) => store.contractTypes.body.data);
+  const contracts = useSelector((store) => store.contractTypes);
+  useEffect(() => {
+    console.log(contracts);
+    if (contracts.loading === false) notify();
+  }, [contracts]);
   useEffect(() => {
     dispatch(getContracts(cookie.userToken));
   }, []);
   const handleShow = (e) => {
-    // dispatch(selectedUser(data.find((user) => user.id == e.currentTarget.id)));
+    dispatch(
+      selectedContr(contracts.find((item) => item.id == e.currentTarget.id))
+    );
 
-    dispatch(modalToggle(true));
+    dispatch(contractModalToggle(true));
+  };
+  const notify = () => {
+    toast.success("Malumot saqlandi");
   };
 
   const columns = [
@@ -58,13 +70,9 @@ function ContractTypes() {
     },
   ];
 
-  const notify = () => {
-    toast.success("Malumot saqlandi");
-  };
-
   const dedaultShow = () => {
-    dispatch(modalToggle(true));
-    // dispatch(defaultUse());
+    dispatch(defaultContr());
+    dispatch(contractModalToggle(true));
   };
   return (
     <div>
@@ -77,8 +85,8 @@ function ContractTypes() {
           </Button>
         </div>
         <ToastMsg />
-        <DataTables columns={columns} data={contracts} />
-        <UserActions />
+        <DataTables columns={columns} data={contracts.body.data} />
+        <ContractModal />
         <button onClick={notify}>boss</button>
       </div>
     </div>

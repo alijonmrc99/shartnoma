@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialValue = {
   menuToggler: true,
   logoutToggler: false,
-  modalTogler: false,
+  userModalTogler: false,
+  contractModalTogler: false,
 };
 
 export const menuSlice = createSlice({
@@ -13,8 +14,11 @@ export const menuSlice = createSlice({
     menuToggle: (state) => {
       state.menuToggler = !state.menuToggler;
     },
-    modalToggle: (state, actions) => {
-      state.modalTogler = actions.payload;
+    userModalToggle: (state, actions) => {
+      state.userModalTogler = actions.payload;
+    },
+    contractModalToggle: (state, actions) => {
+      state.contractModalTogler = actions.payload;
     },
     exitToggle: (state) => {
       state.logoutToggler = !state.logoutToggler;
@@ -22,5 +26,6 @@ export const menuSlice = createSlice({
   },
 });
 
-export const { menuToggle, exitToggle, modalToggle } = menuSlice.actions;
+export const { menuToggle, exitToggle, userModalToggle, contractModalToggle } =
+  menuSlice.actions;
 export default menuSlice.reducer;

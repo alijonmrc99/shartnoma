@@ -3,18 +3,18 @@ import "./main.css";
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
-import { modalToggle } from "../../store/reduser/menu/menuSlice";
+import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
 
 function UserActions() {
-  const show = useSelector((state) => state.menu.modalTogler);
+  const show = useSelector((state) => state.menu.userModalTogler);
   const regions = useSelector((store) => store.regions);
   const district = useSelector((store) => store.district);
   const initialData = useSelector((store) => store.user);
   const [user, setUser] = useState(initialData);
 
   const dispatch = useDispatch();
-  const handleClose = () => dispatch(modalToggle(false));
+  const handleClose = () => dispatch(userModalToggle(false));
 
   useEffect(() => {
     // console.log(user.attributes.First_name);
@@ -48,7 +48,6 @@ function UserActions() {
         backdrop="static"
         keyboard={false}
         centered
-        aria-labelledby="contained-modal-title-vcenter"
       >
         <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
@@ -170,7 +169,6 @@ function UserActions() {
                   </Form.Group>
                 </Col>
               </Row>
-              <div></div>
             </Container>
           </Modal.Body>
           <Modal.Footer>

@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
 import zipcelx from "zipcelx";
 import ToastMsg from "../components/toasts/ToastMsg";
-import UserActions from "../components/Modalls/Modal";
+import UserActions from "../components/Modalls/userModal";
 import { useDispatch, useSelector } from "react-redux";
-import { modalToggle } from "../store/reduser/menu/menuSlice";
+import { userModalToggle } from "../store/reduser/menu/menuSlice";
 import data from "../store/reduser/data.json";
 import { defaultUser, selectedUser } from "../store/reduser/user/userSlice";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
@@ -53,7 +53,7 @@ function Students() {
   const handleShow = (e) => {
     dispatch(selectedUser(data.find((user) => user.id == e.currentTarget.id)));
 
-    dispatch(modalToggle(true));
+    dispatch(userModalToggle(true));
   };
 
   const columns = [
@@ -112,7 +112,7 @@ function Students() {
     toast.success("Malumot saqlandi");
   };
   const dedaultShow = () => {
-    dispatch(modalToggle(true));
+    dispatch(userModalToggle(true));
     dispatch(defaultUser());
   };
   return (
