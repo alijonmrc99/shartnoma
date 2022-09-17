@@ -5,7 +5,10 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
-import { createContractAsync } from "../../store/reduser/contracts/getcontractSlice";
+import {
+  createContractAsync,
+  editContractAsync,
+} from "../../store/reduser/contracts/getcontractSlice";
 import { useCookies } from "react-cookie";
 
 function ContractModal() {
@@ -36,11 +39,22 @@ function ContractModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(
-      createContractAsync({ token: cookie.userToken, body: contact.attributes })
-    );
+    initialData.id
+      ? dispatch(
+          editContractAsync({
+            token: cookie.userToken,
+            body: contact,
+          })
+        )
+      : dispatch(
+          createContractAsync({
+            token: cookie.userToken,
+            body: contact.attributes,
+          })
+        );
     // dispatch(addContract(createdUser?.body?.data));
-    console.log(contact);
+    dispatch(contractModalToggle(false));
+    setContract(initialData);
   }
   return (
     <>

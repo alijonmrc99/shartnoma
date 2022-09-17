@@ -18,22 +18,27 @@ function ContractTypes() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const contracts = useSelector((store) => store.contractTypes);
-  useEffect(() => {
-    console.log(contracts);
-    if (contracts.loading === false) notify();
-  }, [contracts]);
+
   useEffect(() => {
     dispatch(getContracts(cookie.userToken));
   }, []);
+
   const handleShow = (e) => {
     dispatch(
-      selectedContr(contracts.find((item) => item.id == e.currentTarget.id))
+      selectedContr(
+        contracts.body.data.find((item) => item.id == e.currentTarget.id)
+      )
     );
 
     dispatch(contractModalToggle(true));
   };
   const notify = () => {
     toast.success("Malumot saqlandi");
+  };
+
+  const dedaultShow = () => {
+    dispatch(defaultContr());
+    dispatch(contractModalToggle(true));
   };
 
   const columns = [
@@ -44,13 +49,13 @@ function ContractTypes() {
       width: "4rem",
     },
     {
-      name: "Kontract nomi",
+      name: "Yo'nalish nomi",
       selector: (row) => row.attributes.direction,
       sortable: true,
       //   width: "250px",
     },
     {
-      name: "Kontract norxi",
+      name: "Kontrakt norxi",
       selector: (row) => row.attributes.price,
       sortable: true,
       //   width: "250px",
@@ -60,20 +65,16 @@ function ContractTypes() {
       name: "Harakatlar",
       width: "130px",
       selector: (row) => (
-        <div>
+        <>
           <Button id={row.id} onClick={handleShow} className="success-btn">
             <i className="bi bi-pencil-fill" />
           </Button>{" "}
-          <ConfirmModal />
-        </div>
+          <ConfirmModal id={row.id} toast={toast} />
+        </>
       ),
     },
   ];
 
-  const dedaultShow = () => {
-    dispatch(defaultContr());
-    dispatch(contractModalToggle(true));
-  };
   return (
     <div>
       <div>
@@ -87,7 +88,6 @@ function ContractTypes() {
         <ToastMsg />
         <DataTables columns={columns} data={contracts.body.data} />
         <ContractModal />
-        <button onClick={notify}>boss</button>
       </div>
     </div>
   );
