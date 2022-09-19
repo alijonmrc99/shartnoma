@@ -21,13 +21,13 @@ function Menu() {
           </Link>
         </li>
         <li>
-          <Link to="conracts">
+          <Link to="contracts">
             <i className="bi me-2 bi-file-earmark-medical-fill"></i>Shartnoma
             berish
           </Link>
         </li>
         <li>
-          <Link to="contacts">
+          <Link to="directions">
             <i className="bi me-2 bi-file-earmark-medical-fill"></i>Yo'nalishlar
           </Link>
         </li>

@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
-import ContractModal from "../components/Modalls/contractModal";
+import DireactionModal from "../components/Modalls/directionModal";
 import DataTables from "../components/table/dataTable";
 import ToastMsg from "../components/toasts/ToastMsg";
 import {
@@ -74,16 +74,11 @@ function ContractTypes() {
   return (
     <div>
       <div>
-        <h2 className="border-bottom mb-2">Yo'nalishlar ro'yaxti</h2>
-        <div className="actions mb-2 d-flex justify-content-end">
-          <Button className="peremium-btn me-2" onClick={dedaultShow}>
-            <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
-            Yo'nalish qo'shish
-          </Button>
-        </div>
+        <h2 className="border-bottom mb-2">Shartnoma berish</h2>
+
         <ToastMsg />
         <DataTables columns={columns} data={contracts.body.data} />
-        <ContractModal />
+        <DireactionModal />
       </div>
     </div>
   );
