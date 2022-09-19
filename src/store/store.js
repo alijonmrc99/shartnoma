@@ -3,8 +3,8 @@ import districtssSlice from "./reduser/distictSlice/districtSlice";
 import menuReduser from "./reduser/menu/menuSlice";
 import regionsSlice from "./reduser/regionSlice/regionsSlice";
 import userSlice from "./reduser/user/userSlice";
-import contractsTypesSlice from "./reduser/contracts/contractsSlice";
-import contractSlice from "./reduser/contracts/contractSlice";
+import directonsTypesSlice from "./reduser/directions/directionsSlice";
+import directionSlice from "./reduser/directions/directionSlice";
 import usersSlice from "./reduser/user/usersSlice";
 
 export default configureStore({
@@ -14,7 +14,7 @@ export default configureStore({
     district: districtssSlice,
     user: userSlice,
     users: usersSlice,
-    contractTypes: contractsTypesSlice,
-    contract: contractSlice,
+    directionTypes: directonsTypesSlice,
+    direction: directionSlice,
   },
 });

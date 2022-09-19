@@ -10,14 +10,14 @@ import ToastMsg from "../components/toasts/ToastMsg";
 import {
   defaultContr,
   selectedContr,
-} from "../store/reduser/contracts/contractSlice";
-import getAsync from "../store/reduser/contracts/actions/getData";
+} from "../store/reduser/directions/directionSlice";
+import getAsync from "../store/reduser/directions/actions/getData";
 import { contractModalToggle } from "../store/reduser/menu/menuSlice";
 
 function ContractTypes() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-  const contracts = useSelector((store) => store.contractTypes);
+  const contracts = useSelector((store) => store.directionTypes);
 
   useEffect(() => {
     dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
@@ -31,9 +31,6 @@ function ContractTypes() {
     );
 
     dispatch(contractModalToggle(true));
-  };
-  const notify = () => {
-    toast.success("Malumot saqlandi");
   };
 
   const dedaultShow = () => {
@@ -52,7 +49,6 @@ function ContractTypes() {
       name: "Yo'nalish nomi",
       selector: (row) => row.attributes.direction,
       sortable: true,
-      //   width: "250px",
     },
     {
       name: "Kontrakt norxi",

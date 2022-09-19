@@ -8,7 +8,7 @@ const initialState = {
   },
 };
 
-export const contractSlice = createSlice({
+export const directionSlice = createSlice({
   name: "conract",
   initialState,
   reducers: {
@@ -21,5 +21,5 @@ export const contractSlice = createSlice({
   },
 });
 
-export const { defaultContr, selectedContr } = contractSlice.actions;
-export default contractSlice.reducer;
+export const { defaultContr, selectedContr } = directionSlice.actions;
+export default directionSlice.reducer;

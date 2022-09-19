@@ -5,15 +5,15 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
-import createAsync from "../../store/reduser/contracts/actions/create";
-import editAsync from "../../store/reduser/contracts/actions/edit";
+import createAsync from "../../store/reduser/directions/actions/create";
+import editAsync from "../../store/reduser/directions/actions/edit";
 import { useCookies } from "react-cookie";
 
 function ContractModal() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const show = useSelector((store) => store.menu.contractModalTogler);
-  const initialData = useSelector((store) => store.contract);
+  const initialData = useSelector((store) => store.direction);
   const [contract, setContract] = useState(initialData);
 
   const handleClose = () => dispatch(contractModalToggle(false));
@@ -52,7 +52,7 @@ function ContractModal() {
             path: "contract-types",
           })
         );
-    // dispatch(addContract(createdUser?.body?.data));
+
     dispatch(contractModalToggle(false));
     setContract(initialData);
   }
@@ -83,7 +83,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="text"
                       name="direction"
-                      value={contract.attributes.direction}
+                      value={contract?.attributes?.direction}
                     />
                   </Form.Group>
                   {/* Lastname input area */}
@@ -96,7 +96,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="number"
                       name="price"
-                      value={contract.attributes.price}
+                      value={contract?.attributes?.price}
                     />
                   </Form.Group>
                 </Col>

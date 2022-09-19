@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
-const getAsync = createAsyncThunk("contractTypes/getConracts", (data) => {
+const getAsync = createAsyncThunk("directonsTypes/getConracts", (data) => {
   return axios
     .get(data.path, {
       headers: {

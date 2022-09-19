@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
 const editAsync = createAsyncThunk(
-  "contractTypes/editContractAsync",
+  "directonsTypes/editContractAsync",
   (data) => {
     return axios
       .put(

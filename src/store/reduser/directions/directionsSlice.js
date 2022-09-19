@@ -6,8 +6,8 @@ import getAsync from "./actions/getData";
 import createAsync from "./actions/create";
 import editAsync from "./actions/edit";
 
-export const contractsTypesSlice = createSlice({
-  name: "contractTypes",
+export const directonsTypesSlice = createSlice({
+  name: "directonsTypes",
   initialState: initialState,
 
   extraReducers: {
@@ -78,4 +78,4 @@ export const contractsTypesSlice = createSlice({
   },
 });
 
-export default contractsTypesSlice.reducer;
+export default directonsTypesSlice.reducer;

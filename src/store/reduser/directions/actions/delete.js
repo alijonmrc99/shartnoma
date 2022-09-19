@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
 const deleteContractAsync = createAsyncThunk(
-  "contractTypes/deleteAsync",
+  "directonsTypesSlice/deleteAsync",
   (data) => {
     return axios
       .delete(data.path, {

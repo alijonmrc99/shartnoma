@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import deleteAsync from "../../store/reduser/user/actions/delete";
-import deleteContractAsync from "../../store/reduser/contracts/actions/delete";
+import deleteContractAsync from "../../store/reduser/directions/actions/delete";
 import ToastMsg from "../toasts/ToastMsg";
 
 function ConfirmModal({ path }) {
