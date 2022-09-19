@@ -1,9 +1,8 @@
 import React from "react";
 import "./main.css";
-// import logo from "../../img/logo.png";
 import { useDispatch, useSelector } from "react-redux";
 import { exitToggle, menuToggle } from "../../store/reduser/menu/menuSlice";
-import { Cookies, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 export default function Header({ username = "Alijon Kuvondikov N" }) {
   const [, , removeCookie] = useCookies();
@@ -25,7 +24,7 @@ export default function Header({ username = "Alijon Kuvondikov N" }) {
 
   function userLogOut() {
     console.log(1);
-    removeCookie("userToken");
+    removeCookie("userToken", { path: "/" });
   }
 
   return (

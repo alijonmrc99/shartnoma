@@ -5,10 +5,8 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
-import {
-  createContractAsync,
-  editContractAsync,
-} from "../../store/reduser/contracts/getcontractSlice";
+import createAsync from "../../store/reduser/contracts/actions/create";
+import editAsync from "../../store/reduser/contracts/actions/edit";
 import { useCookies } from "react-cookie";
 
 function ContractModal() {
@@ -16,7 +14,7 @@ function ContractModal() {
   const [cookie] = useCookies();
   const show = useSelector((store) => store.menu.contractModalTogler);
   const initialData = useSelector((store) => store.contract);
-  const [contact, setContract] = useState(initialData);
+  const [contract, setContract] = useState(initialData);
 
   const handleClose = () => dispatch(contractModalToggle(false));
 
@@ -25,14 +23,14 @@ function ContractModal() {
   }, [initialData]);
 
   function handleChange(e) {
-    let data = contact.attributes;
+    let data = contract.attributes;
     data = {
       ...data,
       [e.target.name]: e.target.value,
     };
 
     setContract({
-      id: contact.id,
+      id: contract.id,
       attributes: data,
     });
   }
@@ -41,15 +39,17 @@ function ContractModal() {
     e.preventDefault();
     initialData.id
       ? dispatch(
-          editContractAsync({
+          editAsync({
             token: cookie.userToken,
-            body: contact,
+            body: contract,
+            path: "contract-types/" + initialData.id,
           })
         )
       : dispatch(
-          createContractAsync({
+          createAsync({
             token: cookie.userToken,
-            body: contact.attributes,
+            body: contract.attributes,
+            path: "contract-types",
           })
         );
     // dispatch(addContract(createdUser?.body?.data));
@@ -83,7 +83,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="text"
                       name="direction"
-                      value={contact.attributes.direction}
+                      value={contract.attributes.direction}
                     />
                   </Form.Group>
                   {/* Lastname input area */}
@@ -96,7 +96,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="number"
                       name="price"
-                      value={contact.attributes.price}
+                      value={contract.attributes.price}
                     />
                   </Form.Group>
                 </Col>

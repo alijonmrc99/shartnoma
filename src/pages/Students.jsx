@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DataTables from "../components/table/dataTable";
 import { toast } from "react-toastify";
 import { Button } from "react-bootstrap";
@@ -10,50 +10,31 @@ import { userModalToggle } from "../store/reduser/menu/menuSlice";
 import data from "../store/reduser/data.json";
 import { defaultUser, selectedUser } from "../store/reduser/user/userSlice";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
+import { useCookies } from "react-cookie";
+import getAsync from "../store/reduser/user/actions/getData";
+import createExcel from "../components/CreateExcell/createExcell";
 
 // import ConfirmModal from "../Modalls/ConfirmModal";
 
 function Students() {
   const dispatch = useDispatch();
-  function createExcel() {
-    const config = {
-      filename: "excel",
-      sheet: {
-        data: [],
-      },
-    };
-    const header = columns.map((item) => ({
-      value: item.name,
-      type: typeof item.name,
-    }));
-
-    config.sheet.data.push(header);
-    data.forEach((item) => {
-      const rowOne = [
-        {
-          value: item.title,
-          type: typeof item.title,
-        },
-        {
-          value: item.year,
-          type: isNaN(+item.year) ? "string" : "number",
-        },
-        {
-          value: item.someThing,
-          type: typeof item.someThing,
-        },
-      ];
-      config.sheet.data.push(rowOne);
-    });
-    zipcelx(config);
-  }
-
-  const regions = useSelector((store) => store.regions);
+  const [cookie] = useCookies();
+  const data = useSelector((store) => store.users);
   const district = useSelector((store) => store.district);
-  const handleShow = (e) => {
-    dispatch(selectedUser(data.find((user) => user.id == e.currentTarget.id)));
+  const regions = useSelector((store) => store.regions);
+  useEffect(() => {
+    dispatch(getAsync({ token: cookie.userToken, path: "students" }));
+  }, []);
 
+  const handleShow = (e) => {
+    dispatch(
+      selectedUser(data.body.data.find((user) => user.id == e.currentTarget.id))
+    );
     dispatch(userModalToggle(true));
+  };
+
+  const makeExcell = () => {
+    createExcel(data.body.data);
   };
 
   const columns = [
@@ -61,7 +42,7 @@ function Students() {
       name: "#",
       selector: (row) => row.id,
       sortable: true,
-      width: "4rem",
+      width: "3rem",
     },
     {
       name: "F.I.SH",
@@ -72,7 +53,7 @@ function Students() {
         " " +
         row.attributes.Fathers_name,
       sortable: true,
-      width: "250px",
+      width: "300px",
     },
     {
       name: "Telfon raqami",
@@ -81,17 +62,18 @@ function Students() {
     {
       name: "Passport raqami",
       selector: (row) => row.attributes.passport,
+      width: "120px",
     },
 
     {
       name: "Viloati",
       selector: (row) =>
-        regions.find((item) => item.id == row.attributes.region).name,
+        regions.find((item) => item.id == row.attributes.region)?.name,
     },
     {
       name: "Tumani",
       selector: (row) =>
-        district.find((item) => item.id == row.attributes.district).name,
+        district.find((item) => item.id == row.attributes.district)?.name,
     },
 
     {
@@ -102,19 +84,17 @@ function Students() {
           <Button id={row.id} onClick={handleShow} className="success-btn">
             <i className="bi bi-pencil-fill" />
           </Button>{" "}
-          <ConfirmModal />
+          <ConfirmModal path={`students/${row.id}`} />
         </div>
       ),
     },
   ];
 
-  const notify = () => {
-    toast.success("Malumot saqlandi");
-  };
   const dedaultShow = () => {
     dispatch(userModalToggle(true));
     dispatch(defaultUser());
   };
+
   return (
     <div>
       <h2 className="border-bottom mb-2">Talabalar ro'yaxti</h2>
@@ -123,15 +103,14 @@ function Students() {
           <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
           Foyfalanuvchi qo'shish
         </Button>
-        <Button className="peremium-btn" onClick={createExcel}>
+        <Button className="peremium-btn" onClick={makeExcell}>
           <i style={{ color: "" }} className="bi bi-filetype-xlsx"></i> Excelda
           yuklash
         </Button>
       </div>
       <ToastMsg />
-      <DataTables columns={columns} data={data} />
+      <DataTables columns={columns} data={data.body.data} />
       <UserActions />
-      <button onClick={notify}>boss</button>
     </div>
   );
 }

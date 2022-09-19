@@ -1,9 +1,6 @@
 import DataTable from "react-data-table-component";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function DataTables({ columns, data }) {
-  const dispatch = useDispatch();
-
   const conditionalRowStyles = [
     {
       when: (row) => row.year > 10,
@@ -54,6 +51,7 @@ export default function DataTables({ columns, data }) {
     <>
       <DataTable
         columns={columns}
+        noDataComponent="Hech qanday ma'lumot yo'q"
         fixedHeader
         conditionalRowStyles={condition && conditionalRowStyles}
         fixedHeaderScrollHeight="100%"

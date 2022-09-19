@@ -3,19 +3,29 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
-import deleteContractAsync from "../../store/reduser/contracts/delete";
+import deleteAsync from "../../store/reduser/user/actions/delete";
+import deleteContractAsync from "../../store/reduser/contracts/actions/delete";
 import ToastMsg from "../toasts/ToastMsg";
 
-function ConfirmModal({ id }) {
+function ConfirmModal({ path }) {
   const [show, setShow] = useState(false);
   const [cookie] = useCookies();
   const dispatch = useDispatch();
 
   const handleClose = () => setShow(false);
 
-  const handleSubmit = () =>
-    dispatch(deleteContractAsync({ id, token: cookie.userToken }));
-
+  const handleSubmit = () => {
+    const [direction] = path.split("/");
+    switch (direction) {
+      case "students": {
+        dispatch(deleteAsync({ path: path, token: cookie.userToken }));
+        break;
+      }
+      case "contract-types": {
+        dispatch(deleteContractAsync({ path: path, token: cookie.userToken }));
+      }
+    }
+  };
   const handleShow = () => setShow(true);
   return (
     <>

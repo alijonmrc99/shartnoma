@@ -5,6 +5,9 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
+import editAsync from "../../store/reduser/user/actions/edit";
+import createAsync from "../../store/reduser/user/actions/create";
+import { useCookies } from "react-cookie";
 
 function UserActions() {
   const show = useSelector((state) => state.menu.userModalTogler);
@@ -12,12 +15,12 @@ function UserActions() {
   const district = useSelector((store) => store.district);
   const initialData = useSelector((store) => store.user);
   const [user, setUser] = useState(initialData);
+  const [cookie] = useCookies();
 
   const dispatch = useDispatch();
   const handleClose = () => dispatch(userModalToggle(false));
 
   useEffect(() => {
-    // console.log(user.attributes.First_name);
     setUser(initialData);
   }, [initialData]);
 
@@ -36,7 +39,22 @@ function UserActions() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(user);
+    initialData.id
+      ? dispatch(
+          editAsync({
+            token: cookie.userToken,
+            body: user,
+            path: "students/" + initialData.id,
+          })
+        )
+      : dispatch(
+          createAsync({
+            token: cookie.userToken,
+            body: user.attributes,
+            path: "students",
+          })
+        );
+    dispatch(userModalToggle(false));
   }
 
   return (
@@ -137,19 +155,29 @@ function UserActions() {
                     controlId="exampleForm.ControlInput4"
                   >
                     <Form.Label>Tumani</Form.Label>
-                    <Form.Select
-                      onChange={handleChange}
-                      name="district"
-                      value={user.attributes.district}
-                      aria-label="Default select example"
-                    >
-                      <option value="0">Tumanni tanlang</option>
-                      {district.map((district) => (
-                        <option value={district.id} key={district.id}>
-                          {district.name}
-                        </option>
-                      ))}
-                    </Form.Select>
+                    {user.attributes.region === 0 ? (
+                      <Form.Select disabled name="district">
+                        {" "}
+                        <option value="0">Tumanni tanlang</option>
+                      </Form.Select>
+                    ) : (
+                      <Form.Select
+                        onChange={handleChange}
+                        name="district"
+                        value={user.attributes.district}
+                      >
+                        <option value="0">Tumanni tanlang</option>
+                        {district
+                          .filter(
+                            (item) => item.region_id === user.attributes.region
+                          )
+                          .map((district) => (
+                            <option value={district.id} key={district.id}>
+                              {district.name}
+                            </option>
+                          ))}
+                      </Form.Select>
+                    )}
                   </Form.Group>
                   {/* Phone number input area */}
                   <Form.Group
@@ -162,7 +190,7 @@ function UserActions() {
                       <Form.Control
                         value={user.attributes.phone}
                         onChange={handleChange}
-                        type="text"
+                        type="number"
                         name="phone"
                       />
                     </InputGroup>

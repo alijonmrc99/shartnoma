@@ -11,7 +11,7 @@ import {
   defaultContr,
   selectedContr,
 } from "../store/reduser/contracts/contractSlice";
-import { getContracts } from "../store/reduser/contracts/getcontractSlice";
+import getAsync from "../store/reduser/contracts/actions/getData";
 import { contractModalToggle } from "../store/reduser/menu/menuSlice";
 
 function ContractTypes() {
@@ -20,7 +20,7 @@ function ContractTypes() {
   const contracts = useSelector((store) => store.contractTypes);
 
   useEffect(() => {
-    dispatch(getContracts(cookie.userToken));
+    dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
   }, []);
 
   const handleShow = (e) => {
@@ -69,7 +69,7 @@ function ContractTypes() {
           <Button id={row.id} onClick={handleShow} className="success-btn">
             <i className="bi bi-pencil-fill" />
           </Button>{" "}
-          <ConfirmModal id={row.id} toast={toast} />
+          <ConfirmModal path={`contract-types/${row.id}`} toast={toast} />
         </>
       ),
     },

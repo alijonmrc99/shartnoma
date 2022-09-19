@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 // import makePdfData from "../components/CreatePdf/data";
-import Header from "../components/header";
+import Header from "../components/header/Header";
 import Menu from "../components/menu/Menu";
 function Dashboard() {
   return (

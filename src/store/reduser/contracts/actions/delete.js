@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "../../../components/axios/Axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../../../components/axios/Axios";
 
 const deleteContractAsync = createAsyncThunk(
-  "contractTypes/editContractAsync",
+  "contractTypes/deleteAsync",
   (data) => {
-    console.log("contract-types/" + data.id);
     return axios
-      .delete("contract-types/" + data.id, {
+      .delete(data.path, {
         headers: {
           Authorization: "Bearer " + data.token,
         },
