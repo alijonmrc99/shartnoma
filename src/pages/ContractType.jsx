@@ -4,23 +4,23 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
-import DireactionModal from "../components/Modalls/directionModal";
 import DataTables from "../components/table/dataTable";
 import ToastMsg from "../components/toasts/ToastMsg";
-import {
-  defaultContr,
-  selectedContr,
-} from "../store/reduser/directions/directionSlice";
-import getAsync from "../store/reduser/directions/actions/getData";
+import { selectedContr } from "../store/reduser/directions/directionSlice";
+import getAsync from "../store/reduser/contract/actions/getData";
 import { contractModalToggle } from "../store/reduser/menu/menuSlice";
+import ContractModal from "../components/Modalls/conractModal";
+import { defaultUser } from "../store/reduser/user/userSlice";
 
 function ContractTypes() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-  const contracts = useSelector((store) => store.directionTypes);
+  const contracts = useSelector((store) => store.contracts);
 
   useEffect(() => {
-    dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
+    dispatch(
+      getAsync({ token: cookie.userToken, path: "contracts?populate=*" })
+    );
   }, []);
 
   const handleShow = (e) => {
@@ -34,10 +34,9 @@ function ContractTypes() {
   };
 
   const dedaultShow = () => {
-    dispatch(defaultContr());
     dispatch(contractModalToggle(true));
+    dispatch(defaultUser());
   };
-
   const columns = [
     {
       name: "#",
@@ -46,13 +45,35 @@ function ContractTypes() {
       width: "4rem",
     },
     {
-      name: "Yo'nalish nomi",
-      selector: (row) => row.attributes.direction,
-      sortable: true,
+      name: "FISH",
+      selector: (row) =>
+        `${row.attributes.student.data.attributes.Last_name} ${row.attributes.student.data.attributes.First_name}`,
+      width: "180px",
     },
     {
-      name: "Kontrakt norxi",
-      selector: (row) => row.attributes.price,
+      name: "Passport raqami",
+      selector: (row) => row.attributes.student.data.attributes.passport,
+      width: "150px",
+    },
+    {
+      name: "Yo'nalishi",
+      selector: (row) => row.attributes.contract_type.data.attributes.direction,
+      //   width: "250px",
+    },
+    {
+      name: "Kontrakt raqami",
+      selector: (row) => row.attributes.contract_number,
+      width: "100px",
+    },
+    {
+      name: "Boshlanish sanasi",
+      selector: (row) => row.attributes.beginning_date,
+      sortable: true,
+      //   width: "250px",
+    },
+    {
+      name: "Tugash sanasi",
+      selector: (row) => row.attributes.due_date,
       sortable: true,
       //   width: "250px",
     },
@@ -75,10 +96,13 @@ function ContractTypes() {
     <div>
       <div>
         <h2 className="border-bottom mb-2">Shartnoma berish</h2>
-
+        <Button className="peremium-btn me-2" onClick={dedaultShow}>
+          <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
+          Foyfalanuvchi qo'shish
+        </Button>
         <ToastMsg />
-        <DataTables columns={columns} data={contracts.body.data} />
-        <DireactionModal />
+        <DataTables columns={columns} data={[]} />
+        <ContractModal />
       </div>
     </div>
   );

@@ -1,14 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
-const getAsync = createAsyncThunk("directonsTypes/getConracts", (data) => {
+const getAsync = createAsyncThunk("contractsTypes/getConracts", (data) => {
   return axios
     .get(data.path, {
       headers: {
         Authorization: "Bearer " + data.token,
       },
     })
-    .then((res) => res.data)
+    .then((res) => {
+      console.log(res.data);
+      return res.data;
+    })
     .catch((error) => error.response.statusText);
 });
 

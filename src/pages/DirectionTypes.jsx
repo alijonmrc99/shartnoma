@@ -12,7 +12,10 @@ import {
   selectedContr,
 } from "../store/reduser/directions/directionSlice";
 import getAsync from "../store/reduser/directions/actions/getData";
-import { contractModalToggle } from "../store/reduser/menu/menuSlice";
+import {
+  contractModalToggle,
+  directionModalTogle,
+} from "../store/reduser/menu/menuSlice";
 
 function DirectionTypes() {
   const dispatch = useDispatch();
@@ -30,12 +33,12 @@ function DirectionTypes() {
       )
     );
 
-    dispatch(contractModalToggle(true));
+    dispatch(directionModalTogle(true));
   };
 
   const dedaultShow = () => {
     dispatch(defaultContr());
-    dispatch(contractModalToggle(true));
+    dispatch(directionModalTogle(true));
   };
 
   const columns = [
@@ -51,7 +54,7 @@ function DirectionTypes() {
       sortable: true,
     },
     {
-      name: "Kontrakt norxi",
+      name: "Kontrakt narxi",
       selector: (row) => row.attributes.price,
       sortable: true,
       //   width: "250px",

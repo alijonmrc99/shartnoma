@@ -19,7 +19,7 @@ function Home() {
         <Col>
           <div className="card shadow">
             <div className="card-body">
-              <h3 className="card-header">Kantakni to'laganlar</h3>
+              <h3 className="card-header">Kontrakt to'laganlar</h3>
               <p className="card-text">123</p>
               <div className="d-flex justify-content-end">
                 <Button className="button-success">Ko'rish</Button>

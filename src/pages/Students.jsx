@@ -56,7 +56,7 @@ function Students() {
       width: "300px",
     },
     {
-      name: "Telfon raqami",
+      name: "Telefon raqami",
       selector: (row) => row.attributes.phone,
     },
     {
@@ -66,7 +66,7 @@ function Students() {
     },
 
     {
-      name: "Viloati",
+      name: "Viloyati",
       selector: (row) =>
         regions.find((item) => item.id == row.attributes.region)?.name,
     },
@@ -101,7 +101,7 @@ function Students() {
       <div className="actions mb-2 d-flex justify-content-end">
         <Button className="peremium-btn me-2" onClick={dedaultShow}>
           <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
-          Foyfalanuvchi qo'shish
+          Foydalanuvchi qo'shish
         </Button>
         <Button className="peremium-btn" onClick={makeExcell}>
           <i style={{ color: "" }} className="bi bi-filetype-xlsx"></i> Excelda

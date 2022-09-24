@@ -32,7 +32,7 @@ function Menu() {
           </Link>
         </li>
         <li>
-          <Link to="conracts">
+          <Link to="#">
             <i className="bi me-2 bi-pie-chart-fill"></i>To'lov monitoring
           </Link>
         </li>

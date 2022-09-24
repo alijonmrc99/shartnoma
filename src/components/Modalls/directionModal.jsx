@@ -3,7 +3,7 @@ import "./main.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
-import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
+import { directionModalTogle } from "../../store/reduser/menu/menuSlice";
 import { useEffect } from "react";
 import createAsync from "../../store/reduser/directions/actions/create";
 import editAsync from "../../store/reduser/directions/actions/edit";
@@ -12,11 +12,11 @@ import { useCookies } from "react-cookie";
 function DireactionModal() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-  const show = useSelector((store) => store.menu.contractModalTogler);
+  const show = useSelector((store) => store.menu.directionModalTogler);
   const initialData = useSelector((store) => store.direction);
   const [contract, setContract] = useState(initialData);
 
-  const handleClose = () => dispatch(contractModalToggle(false));
+  const handleClose = () => dispatch(directionModalTogle(false));
 
   useEffect(() => {
     setContract(initialData);
@@ -53,7 +53,7 @@ function DireactionModal() {
           })
         );
 
-    dispatch(contractModalToggle(false));
+    dispatch(directionModalTogle(false));
     setContract(initialData);
   }
   return (

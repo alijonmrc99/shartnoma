@@ -4,7 +4,8 @@ const initialValue = {
   menuToggler: true,
   logoutToggler: false,
   userModalTogler: false,
-  contractModalTogler: false,
+  directionModalTogler: false,
+  contractModalToggler: false,
 };
 
 export const menuSlice = createSlice({
@@ -17,8 +18,11 @@ export const menuSlice = createSlice({
     userModalToggle: (state, actions) => {
       state.userModalTogler = actions.payload;
     },
+    directionModalTogle: (state, actions) => {
+      state.directionModalTogler = actions.payload;
+    },
     contractModalToggle: (state, actions) => {
-      state.contractModalTogler = actions.payload;
+      state.contractModalToggler = actions.payload;
     },
     exitToggle: (state) => {
       state.logoutToggler = !state.logoutToggler;
@@ -26,6 +30,11 @@ export const menuSlice = createSlice({
   },
 });
 
-export const { menuToggle, exitToggle, userModalToggle, contractModalToggle } =
-  menuSlice.actions;
+export const {
+  menuToggle,
+  exitToggle,
+  userModalToggle,
+  contractModalToggle,
+  directionModalTogle,
+} = menuSlice.actions;
 export default menuSlice.reducer;
