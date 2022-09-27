@@ -4,10 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import deleteAsync from "../../store/reduser/user/actions/delete";
-import deleteContractAsync from "../../store/reduser/directions/actions/delete";
+import deleteDirectionAsync from "../../store/reduser/directions/actions/delete";
 import ToastMsg from "../toasts/ToastMsg";
+import deleteContractAsync from "../../store/reduser/contract/actions/delete";
 
-function ConfirmModal({ path }) {
+function ConfirmModal({ path, id }) {
   const [show, setShow] = useState(false);
   const [cookie] = useCookies();
   const dispatch = useDispatch();
@@ -22,10 +23,16 @@ function ConfirmModal({ path }) {
         break;
       }
       case "contract-types": {
-        dispatch(deleteContractAsync({ path: path, token: cookie.userToken }));
+        dispatch(deleteDirectionAsync({ path: path, token: cookie.userToken }));
+      }
+      case "contracts": {
+        dispatch(
+          deleteContractAsync({ path: path, token: cookie.userToken, id })
+        );
       }
     }
   };
+
   const handleShow = () => setShow(true);
   return (
     <>

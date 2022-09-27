@@ -14,7 +14,7 @@ const createAsync = createAsyncThunk(
           },
         }
       )
-      .then((res) => res.data)
+      .then((res) => ({ body: res.data, id: data.body.student }))
       .catch((error) => error.response.statusText);
   }
 );

@@ -6,7 +6,10 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
 import DataTables from "../components/table/dataTable";
 import ToastMsg from "../components/toasts/ToastMsg";
-import { selectedContr } from "../store/reduser/directions/directionSlice";
+import {
+  defaultContr,
+  selectedContr,
+} from "../store/reduser/directions/directionSlice";
 import getAsync from "../store/reduser/contract/actions/getData";
 import { contractModalToggle } from "../store/reduser/menu/menuSlice";
 import ContractModal from "../components/Modalls/conractModal";
@@ -18,25 +21,23 @@ function ContractTypes() {
   const contracts = useSelector((store) => store.contracts);
 
   useEffect(() => {
-    dispatch(
-      getAsync({ token: cookie.userToken, path: "contracts?populate=*" })
-    );
+    dispatch(getAsync({ token: cookie.userToken, path: "olganlar" }));
   }, []);
 
   const handleShow = (e) => {
-    dispatch(
-      selectedContr(
-        contracts.body.data.find((item) => item.id == e.currentTarget.id)
-      )
-    );
+    //   dispatch(
+    //     selectedContr(
+    //       contracts.body.data.find((item) => item.id == e.currentTarget.id)
+    //     )
+    //   );
+    //   dispatch(contractModalToggle(true));
+  };
 
+  const defaultShow = (e) => {
+    dispatch(defaultContr(e.currentTarget.id));
     dispatch(contractModalToggle(true));
   };
 
-  const dedaultShow = () => {
-    dispatch(contractModalToggle(true));
-    dispatch(defaultUser());
-  };
   const columns = [
     {
       name: "#",
@@ -46,49 +47,61 @@ function ContractTypes() {
     },
     {
       name: "FISH",
-      selector: (row) =>
-        `${row.attributes.student.data.attributes.Last_name} ${row.attributes.student.data.attributes.First_name}`,
-      width: "180px",
+      selector: (row) => `${row.last_name} ${row.first_name}`,
+      // width: "180px",
     },
     {
       name: "Passport raqami",
-      selector: (row) => row.attributes.student.data.attributes.passport,
-      width: "150px",
+      selector: (row) => row.passport,
+      // width: "150px",
     },
-    {
-      name: "Yo'nalishi",
-      selector: (row) => row.attributes.contract_type.data.attributes.direction,
-      //   width: "250px",
-    },
-    {
-      name: "Kontrakt raqami",
-      selector: (row) => row.attributes.contract_number,
-      width: "100px",
-    },
-    {
-      name: "Boshlanish sanasi",
-      selector: (row) => row.attributes.beginning_date,
-      sortable: true,
-      //   width: "250px",
-    },
-    {
-      name: "Tugash sanasi",
-      selector: (row) => row.attributes.due_date,
-      sortable: true,
-      //   width: "250px",
-    },
+    // {
+    //   name: "Yo'nalishi",
+    //   selector: (row) => row.contract_id,
+    //   //   width: "250px",
+    // },
+    // {
+    //   name: "Kontrakt raqami",
+    //   selector: (row) => row.attributes.contract_number,
+    //   width: "100px",
+    // },
+    // {
+    //   name: "Boshlanish sanasi",
+    //   selector: (row) => row.attributes.beginning_date,
+    //   sortable: true,
+    //   //   width: "250px",
+    // },
+    // {
+    //   name: "Tugash sanasi",
+    //   selector: (row) => row.attributes.due_date,
+    //   sortable: true,
+    //   //   width: "250px",
+    // },
 
     {
       name: "Harakatlar",
       width: "130px",
-      selector: (row) => (
-        <>
-          <Button id={row.id} onClick={handleShow} className="success-btn">
-            <i className="bi bi-pencil-fill" />
-          </Button>{" "}
-          <ConfirmModal path={`contract-types/${row.id}`} toast={toast} />
-        </>
-      ),
+      selector: (row) =>
+        row.contract_id ? (
+          <>
+            <Button
+              id={row.id}
+              onClick={handleShow}
+              className="success-btn me-2"
+            >
+              <i className="bi bi-pencil-fill" />
+            </Button>
+            <ConfirmModal
+              id={row.id}
+              path={`contracts/${row.contract_id}`}
+              toast={toast}
+            />
+          </>
+        ) : (
+          <Button id={row.id} onClick={defaultShow} className="success-btn">
+            <i className="bi bi-person-plus-fill"></i>
+          </Button>
+        ),
     },
   ];
 
@@ -96,12 +109,9 @@ function ContractTypes() {
     <div>
       <div>
         <h2 className="border-bottom mb-2">Shartnoma berish</h2>
-        <Button className="peremium-btn me-2" onClick={dedaultShow}>
-          <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
-          Foyfalanuvchi qo'shish
-        </Button>
+
         <ToastMsg />
-        <DataTables columns={columns} data={[]} />
+        <DataTables columns={columns} data={contracts.body} />
         <ContractModal />
       </div>
     </div>

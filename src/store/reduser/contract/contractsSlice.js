@@ -31,7 +31,11 @@ export const contractsTypesSlice = createSlice({
     },
     [createAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      state.body.data.push(actions.payload.data);
+      state.body.forEach((item) => {
+        if (item.id == actions.payload.id)
+          item.contract_id = actions.payload.body.data.id;
+      });
+
       state.failed = "";
     },
     [createAsync.rejected]: (state, actions) => {
@@ -67,9 +71,9 @@ export const contractsTypesSlice = createSlice({
     },
     [deleteAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      state.body.data = state.body.data.filter(
-        (item) => actions.payload.data.id !== item.id
-      );
+      state.body.forEach((item) => {
+        if (item.id == actions.payload.id) item.contract_id = null;
+      });
       state.failed = "";
     },
     [deleteAsync.rejected]: (state, actions) => {

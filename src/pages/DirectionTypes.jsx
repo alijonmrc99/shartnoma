@@ -36,7 +36,7 @@ function DirectionTypes() {
     dispatch(directionModalTogle(true));
   };
 
-  const dedaultShow = () => {
+  const defaultShow = () => {
     dispatch(defaultContr());
     dispatch(directionModalTogle(true));
   };
@@ -79,7 +79,7 @@ function DirectionTypes() {
       <div>
         <h2 className="border-bottom mb-2">Yo'nalishlar ro'yaxti</h2>
         <div className="actions mb-2 d-flex justify-content-end">
-          <Button className="peremium-btn me-2" onClick={dedaultShow}>
+          <Button className="peremium-btn me-2" onClick={defaultShow}>
             <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
             Yo'nalish qo'shish
           </Button>

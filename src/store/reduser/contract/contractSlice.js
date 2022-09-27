@@ -1,22 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  //   id: null,
-  attributes: {
-    contract_number: "",
-    beginning_date: "",
-    due_date: "",
-    contract_type: "",
-    student: "",
-  },
+  contract_number: "",
+  beginning_date: "",
+  due_date: "",
+  contract_type: 42,
+  student: "",
 };
 
-export const directionSlice = createSlice({
+export const contractSlice = createSlice({
   name: "conract",
   initialState,
   reducers: {
-    defaultContr: () => {
-      return initialState;
+    defaultContr: (state, actions) => {
+      let data = { ...initialState };
+      data.student = actions.payload;
+      return data;
     },
     selectedContr(state, actions) {
       return actions.payload;
@@ -24,5 +23,5 @@ export const directionSlice = createSlice({
   },
 });
 
-export const { defaultContr, selectedContr } = directionSlice.actions;
-export default directionSlice.reducer;
+export const { defaultContr, selectedContr } = contractSlice.actions;
+export default contractSlice.reducer;

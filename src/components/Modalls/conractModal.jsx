@@ -7,17 +7,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
 import getAsync from "../../store/reduser/directions/actions/getData";
+import createAsync from "../../store/reduser/contract/actions/create";
 
 function ContractModal() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
+
   const directions = useSelector((store) => store.directionTypes);
+
   useEffect(() => {
-    dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
+    directions.body.length === 0 &&
+      dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
   }, []);
+
   const show = useSelector((store) => store.menu.contractModalToggler);
 
-  const initialData = useSelector((store) => store.direction);
+  const initialData = useSelector((store) => store.contract);
+
   const [contract, setContract] = useState(initialData);
 
   const handleClose = () => dispatch(contractModalToggle(false));
@@ -27,15 +33,9 @@ function ContractModal() {
   }, [initialData]);
 
   function handleChange(e) {
-    let data = contract.attributes;
-    data = {
-      ...data,
-      [e.target.name]: e.target.value,
-    };
-
     setContract({
-      id: contract.id,
-      attributes: data,
+      ...contract,
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -49,15 +49,16 @@ function ContractModal() {
     //         path: "contract-types/" + initialData.id,
     //       })
     //     )
-    //   : dispatch(
-    //       createAsync({
-    //         token: cookie.userToken,
-    //         body: contract.attributes,
-    //         path: "contract-types",
-    //       })
-    //     );
+    //   :
+    dispatch(
+      createAsync({
+        token: cookie.userToken,
+        body: contract,
+        path: "contracts",
+      })
+    );
     console.log(contract);
-    // dispatch(contractModalToggle(false));
+    dispatch(contractModalToggle(false));
     setContract(initialData);
   }
   return (
@@ -87,7 +88,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="text"
                       name="contract_number"
-                      value={contract?.attributes?.direction}
+                      // value={contract?.attributes?.direction}
                     />
                   </Form.Group>
 
@@ -100,7 +101,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="date"
                       name="beginning_date"
-                      value={contract?.attributes?.price}
+                      value={contract?.beginning_date}
                     />
                   </Form.Group>
 
@@ -113,7 +114,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="date"
                       name="due_date"
-                      value={contract?.attributes?.price}
+                      value={contract?.due_date}
                     />
                   </Form.Group>
                   <Form.Group
@@ -121,8 +122,13 @@ function ContractModal() {
                     controlId="exampleForm.ControlInput3"
                   >
                     <Form.Label>Yo'nalisni tanlang</Form.Label>
-                    <Form.Select onChange={handleChange} name="contract_type">
+                    <Form.Select
+                      value={contract.contract_type}
+                      onChange={handleChange}
+                      name="contract_type"
+                    >
                       <option>Tanlang</option>
+                      {/* <option value="43">sdasdasdas</option> */}
                       {directions?.body?.data?.map((direction) => (
                         <option key={direction.id} value={direction.id}>
                           {direction.attributes.direction}

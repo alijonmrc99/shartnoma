@@ -7,6 +7,7 @@ import directonsTypesSlice from "./reduser/directions/directionsSlice";
 import directionSlice from "./reduser/directions/directionSlice";
 import usersSlice from "./reduser/user/usersSlice";
 import contractsTypesSlice from "./reduser/contract/contractsSlice";
+import contractSlice from "./reduser/contract/contractSlice";
 
 export default configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export default configureStore({
     directionTypes: directonsTypesSlice,
     direction: directionSlice,
     contracts: contractsTypesSlice,
+    contract: contractSlice,
   },
 });

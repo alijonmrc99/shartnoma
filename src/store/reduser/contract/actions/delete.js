@@ -10,7 +10,9 @@ const deleteContractAsync = createAsyncThunk(
           Authorization: "Bearer " + data.token,
         },
       })
-      .then((res) => res.data)
+      .then((res) => {
+        return { body: res.data, id: data.id };
+      })
       .catch((error) => error.response.statusText);
   }
 );

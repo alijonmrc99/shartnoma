@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
-const deleteContractAsync = createAsyncThunk(
+const deleteDirectionAsync = createAsyncThunk(
   "directonsTypesSlice/deleteAsync",
   (data) => {
     return axios
@@ -15,4 +15,4 @@ const deleteContractAsync = createAsyncThunk(
   }
 );
 
-export default deleteContractAsync;
+export default deleteDirectionAsync;

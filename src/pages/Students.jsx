@@ -90,7 +90,7 @@ function Students() {
     },
   ];
 
-  const dedaultShow = () => {
+  const defaultShow = () => {
     dispatch(userModalToggle(true));
     dispatch(defaultUser());
   };
@@ -99,7 +99,7 @@ function Students() {
     <div>
       <h2 className="border-bottom mb-2">Talabalar ro'yaxti</h2>
       <div className="actions mb-2 d-flex justify-content-end">
-        <Button className="peremium-btn me-2" onClick={dedaultShow}>
+        <Button className="peremium-btn me-2" onClick={defaultShow}>
           <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
           Foydalanuvchi qo'shish
         </Button>
