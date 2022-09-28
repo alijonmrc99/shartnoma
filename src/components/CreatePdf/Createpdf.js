@@ -2,7 +2,8 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 // import gerb from "../../img/gerb.png";
 import { font, fontBold, fontItalic } from "./font";
-function CreatePdf(...data) {
+function CreatePdf(arr, img) {
+  const data = [...arr];
   const callAddFont = function () {
     this.addFileToVFS("times new roman bold-normal.ttf", fontBold);
     this.addFont("times new roman bold-normal.ttf", "times new roman", "bold");
@@ -74,6 +75,8 @@ function CreatePdf(...data) {
       drawTable(item.data);
     }
   });
+
+  doc.addImage(img, "PNG", maxLineWidth / 2 - 25, verticalOffset, 50, 50);
 
   function header(texts) {
     doc.text(texts.left, margin, verticalOffset, "left");

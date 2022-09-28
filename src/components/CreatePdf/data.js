@@ -1,6 +1,6 @@
 import CreatePdf from "./Createpdf";
 
-export default function makePdfData(data) {
+export default function makePdfData(data, img, id) {
   const pdfArray = [];
 
   function makeDateFormat(date) {
@@ -393,5 +393,5 @@ export default function makePdfData(data) {
   ]);
 
   // console.log(newArr);
-  CreatePdf(...newArr);
+  CreatePdf(newArr, img, id);
 }
