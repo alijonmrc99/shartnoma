@@ -48,13 +48,16 @@ export const contractsTypesSlice = createSlice({
     },
     [editAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(state);
-      state.body.data.forEach((item, index) => {
+      // console.log(state);
+      state.body.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
-          state.body.data[index].attributes.direction =
-            actions.payload.data.attributes.direction;
-          state.body.data[index].attributes.price =
-            actions.payload.data.attributes.price;
+          state.body[index].beginning_date =
+            actions.payload.data.attributes.beginning_date;
+          state.body[index].due_date = actions.payload.data.attributes.due_date;
+          state.body[index].contract_type =
+            actions.payload.data.attributes.contract_type;
+          state.body[index].contract_number =
+            actions.payload.data.attributes.contract_number;
         }
       });
 

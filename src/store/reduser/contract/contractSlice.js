@@ -4,8 +4,9 @@ const initialState = {
   contract_number: "",
   beginning_date: "",
   due_date: "",
-  contract_type: 42,
+  contract_type: "",
   student: "",
+  id: undefined,
 };
 
 export const contractSlice = createSlice({
@@ -13,6 +14,7 @@ export const contractSlice = createSlice({
   initialState,
   reducers: {
     defaultContr: (state, actions) => {
+      console.log(actions.payload);
       let data = { ...initialState };
       data.student = actions.payload;
       return data;

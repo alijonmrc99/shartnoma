@@ -8,7 +8,7 @@ const editAsync = createAsyncThunk(
       .put(
         data.path,
         {
-          data: data.body.attributes,
+          data: data.body,
         },
         {
           headers: {

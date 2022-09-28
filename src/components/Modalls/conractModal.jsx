@@ -8,6 +8,7 @@ import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
 import getAsync from "../../store/reduser/directions/actions/getData";
 import createAsync from "../../store/reduser/contract/actions/create";
+import editAsync from "../../store/reduser/contract/actions/edit";
 
 function ContractModal() {
   const dispatch = useDispatch();
@@ -41,22 +42,21 @@ function ContractModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // initialData.id
-    //   ? dispatch(
-    //       editAsync({
-    //         token: cookie.userToken,
-    //         body: contract,
-    //         path: "contract-types/" + initialData.id,
-    //       })
-    //     )
-    //   :
-    dispatch(
-      createAsync({
-        token: cookie.userToken,
-        body: contract,
-        path: "contracts",
-      })
-    );
+    initialData.id
+      ? dispatch(
+          editAsync({
+            token: cookie.userToken,
+            body: contract,
+            path: "contracts/" + initialData.id,
+          })
+        )
+      : dispatch(
+          createAsync({
+            token: cookie.userToken,
+            body: contract,
+            path: "contracts",
+          })
+        );
     console.log(contract);
     dispatch(contractModalToggle(false));
     setContract(initialData);
@@ -88,7 +88,7 @@ function ContractModal() {
                       onChange={handleChange}
                       type="text"
                       name="contract_number"
-                      // value={contract?.attributes?.direction}
+                      value={contract?.contract_number}
                     />
                   </Form.Group>
 

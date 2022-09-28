@@ -8,12 +8,14 @@ import Home from "./components/Home/Home";
 import Students from "./pages/Students";
 import DirectionTypes from "./pages/DirectionTypes";
 import ContractTypes from "./pages/ContractType";
+import CreateQRCode from "./components/qrCode/createQRCode";
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Protected />}>
         <Route index element={<Navigate to="home" replace={true} />} />
+        <Route path="qrcode" element={<CreateQRCode />} />
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />
           <Route path="students" element={<Students />} />

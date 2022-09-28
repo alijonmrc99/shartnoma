@@ -25,15 +25,24 @@ function ContractTypes() {
   }, []);
 
   const handleShow = (e) => {
-    //   dispatch(
-    //     selectedContr(
-    //       contracts.body.data.find((item) => item.id == e.currentTarget.id)
-    //     )
-    //   );
-    //   dispatch(contractModalToggle(true));
+    const item = contracts.body.find((item) => item.id == e.currentTarget.id);
+
+    const data = {
+      contract_number: item.contract_number,
+      beginning_date: item.beginning_date,
+      due_date: item.due_date,
+      contract_type: item.contract_type,
+      student: item.student,
+      id: item.contract_id,
+    };
+
+    console.log(data);
+    dispatch(selectedContr(data));
+    dispatch(contractModalToggle(true));
   };
 
   const defaultShow = (e) => {
+    console.log(e.currentTarget.id);
     dispatch(defaultContr(e.currentTarget.id));
     dispatch(contractModalToggle(true));
   };
@@ -55,28 +64,23 @@ function ContractTypes() {
       selector: (row) => row.passport,
       // width: "150px",
     },
-    // {
-    //   name: "Yo'nalishi",
-    //   selector: (row) => row.contract_id,
-    //   //   width: "250px",
-    // },
-    // {
-    //   name: "Kontrakt raqami",
-    //   selector: (row) => row.attributes.contract_number,
-    //   width: "100px",
-    // },
-    // {
-    //   name: "Boshlanish sanasi",
-    //   selector: (row) => row.attributes.beginning_date,
-    //   sortable: true,
-    //   //   width: "250px",
-    // },
-    // {
-    //   name: "Tugash sanasi",
-    //   selector: (row) => row.attributes.due_date,
-    //   sortable: true,
-    //   //   width: "250px",
-    // },
+    {
+      name: "Kontrakt raqami",
+      selector: (row) => row.contract_number,
+      width: "100px",
+    },
+    {
+      name: "Boshlanish sanasi",
+      selector: (row) => row.beginning_date,
+      sortable: true,
+      //   width: "250px",
+    },
+    {
+      name: "Tugash sanasi",
+      selector: (row) => row.due_date,
+      sortable: true,
+      //   width: "250px",
+    },
 
     {
       name: "Harakatlar",
