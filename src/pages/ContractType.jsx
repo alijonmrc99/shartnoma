@@ -14,6 +14,7 @@ import getAsync from "../store/reduser/contract/actions/getData";
 import { contractModalToggle } from "../store/reduser/menu/menuSlice";
 import ContractModal from "../components/Modalls/conractModal";
 import { defaultUser } from "../store/reduser/user/userSlice";
+import CreateQRCode from "../components/qrCode/createQRCode";
 
 function ContractTypes() {
   const dispatch = useDispatch();
@@ -84,7 +85,7 @@ function ContractTypes() {
 
     {
       name: "Harakatlar",
-      width: "130px",
+      width: "180px",
       selector: (row) =>
         row.contract_id ? (
           <>
@@ -100,6 +101,7 @@ function ContractTypes() {
               path={`contracts/${row.contract_id}`}
               toast={toast}
             />
+            <CreateQRCode id={row.id} />
           </>
         ) : (
           <Button id={row.id} onClick={defaultShow} className="success-btn">
@@ -113,7 +115,6 @@ function ContractTypes() {
     <div>
       <div>
         <h2 className="border-bottom mb-2">Shartnoma berish</h2>
-
         <ToastMsg />
         <DataTables columns={columns} data={contracts.body} />
         <ContractModal />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import Protected from "./Protected";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -15,7 +15,9 @@ function Router() {
     <Routes>
       <Route path="/" element={<Protected />}>
         <Route index element={<Navigate to="home" replace={true} />} />
-        <Route path="qrcode" element={<CreateQRCode />} />
+        <Route path="shartnomalar" element={<Outlet />}>
+          <Route path=":id" element={<CreateQRCode />} />
+        </Route>
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />
           <Route path="students" element={<Students />} />

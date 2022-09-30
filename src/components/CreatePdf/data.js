@@ -2,7 +2,7 @@ import CreatePdf from "./Createpdf";
 
 export default function makePdfData(data, img, id) {
   const pdfArray = [];
-
+  console.log(img);
   function makeDateFormat(date) {
     const newDate = date ? new Date(date) : new Date();
     return ` “${

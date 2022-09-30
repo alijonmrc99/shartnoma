@@ -1,31 +1,18 @@
-import jsPDF from "jspdf";
+import { Button } from "react-bootstrap";
 import { QRCodeCanvas } from "qrcode.react";
 import React, { useRef, useEffect } from "react";
 import makePdfData from "../CreatePdf/data";
 import rasm from "./logo512.png";
 
-function CreateQRCode() {
-  const canvas = (
-    <QRCodeCanvas
-      imageSettings={{
-        excavate: true,
-        src: rasm,
-        width: "35",
-        height: "35",
-      }}
-      value="https://github.com/"
-    />
-  );
+function CreateQRCode({ id }) {
+  const url = `https://172.16.1.35/shartnomalar/${id}`;
+  const canvas = <QRCodeCanvas value={url} />;
   const canvasImg = useRef();
 
   let dataImg;
 
   function createPdf() {
-    const doc = new jsPDF("p", "pt", "a4").setProperties({
-      title: "Shartnoma",
-    });
-    doc.addImage(dataImg, "PNG", 50, 50, 50, 50);
-    doc.save("test.pdf");
+    makePdfData([], dataImg, 1);
   }
   useEffect(() => {
     {
@@ -33,13 +20,16 @@ function CreateQRCode() {
       console.log(dataImg);
     }
   }, []);
+
   return (
-    <div>
+    <>
       <div style={{ display: "none" }} ref={canvasImg}>
         {canvas}
-      </div>
-      <button onClick={createPdf}>olish</button>
-    </div>
+      </div>{" "}
+      <Button variant="ligt" className="border" onClick={createPdf}>
+        <i className="bi text-danger bi-file-earmark-pdf-fill"></i>
+      </Button>
+    </>
   );
 }
 
