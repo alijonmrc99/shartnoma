@@ -82,7 +82,6 @@ function ContractTypes() {
       sortable: true,
       //   width: "250px",
     },
-
     {
       name: "Harakatlar",
       width: "180px",
@@ -101,7 +100,7 @@ function ContractTypes() {
               path={`contracts/${row.contract_id}`}
               toast={toast}
             />
-            <CreateQRCode id={row.id} />
+            {/* <CreateQRCode id={row.id} /> */}
           </>
         ) : (
           <Button id={row.id} onClick={defaultShow} className="success-btn">

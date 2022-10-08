@@ -57,7 +57,7 @@ export default function DataTables({ columns, data }) {
         fixedHeaderScrollHeight="100%"
         data={data}
         customStyles={customStyles}
-        // selectableRows
+        selectableRows
       />
     </>
   );
