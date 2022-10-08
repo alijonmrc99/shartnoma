@@ -7,7 +7,7 @@ import createAsync from "./actions/create";
 import editAsync from "./actions/edit";
 
 export const contractsTypesSlice = createSlice({
-  name: "contractsTypes",
+  name: "monitoringSlice",
   initialState: initialState,
 
   extraReducers: {

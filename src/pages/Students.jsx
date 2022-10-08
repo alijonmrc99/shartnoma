@@ -22,6 +22,7 @@ function Students() {
   const data = useSelector((store) => store.users);
   const district = useSelector((store) => store.district);
   const regions = useSelector((store) => store.regions);
+
   useEffect(() => {
     dispatch(getAsync({ token: cookie.userToken, path: "students" }));
   }, []);
