@@ -6,28 +6,29 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
-import getAsync from "../../store/reduser/directions/actions/getData";
 import createAsync from "../../store/reduser/contract/actions/create";
 import editAsync from "../../store/reduser/contract/actions/edit";
+import getAsync from "../../store/reduser/directions/actions/getData";
 
 function ContractModal() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
 
-  const directions = useSelector((store) => store.directionTypes);
 
   useEffect(() => {
     directions.body.length === 0 &&
       dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
   }, []);
 
+  const directions = useSelector((store) => store.directionTypes);
   const show = useSelector((store) => store.menu.contractModalToggler);
-
   const initialData = useSelector((store) => store.contract);
 
   const [contract, setContract] = useState(initialData);
 
-  const handleClose = () => dispatch(contractModalToggle(false));
+  const handleClose = () => {
+    dispatch(contractModalToggle(false))
+  };
 
   useEffect(() => {
     setContract(initialData);
@@ -42,23 +43,23 @@ function ContractModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(contract);
     initialData.id
       ? dispatch(
-          editAsync({
-            token: cookie.userToken,
-            body: contract,
-            path: "contracts/" + initialData.id,
-          })
-        )
+        editAsync({
+          token: cookie.userToken,
+          body: contract,
+          path: "contracts/" + initialData.id + "?populate=*",
+        })
+      )
       : dispatch(
-          createAsync({
-            token: cookie.userToken,
-            body: contract,
-            path: "contracts",
-          })
-        );
-    console.log(contract);
-    dispatch(contractModalToggle(false));
+        createAsync({
+          token: cookie.userToken,
+          body: contract,
+          path: "/contracts?populate=*",
+        })
+      );
+    handleClose()
     setContract(initialData);
   }
   return (

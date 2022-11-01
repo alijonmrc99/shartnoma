@@ -1,22 +1,9 @@
-import React, { useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { useCookies } from "react-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import ConfirmModal from "../components/Modalls/ConfirmModal";
-import DataTables from "../components/table/dataTable";
-import ToastMsg from "../components/toasts/ToastMsg";
-import {
-  defaultContr,
-  selectedContr,
-} from "../store/reduser/directions/directionSlice";
-import getAsync from "../store/reduser/contract/actions/getData";
-import { contractModalToggle } from "../store/reduser/menu/menuSlice";
-import ContractModal from "../components/Modalls/conractModal";
-import { defaultUser } from "../store/reduser/user/userSlice";
-import CreateQRCode from "../components/qrCode/createQRCode";
+import React from "react";
+import { Col, Row } from "react-bootstrap";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 function ContractTypes() {
+<<<<<<< HEAD
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const contracts = useSelector((store) => store.contracts);
@@ -110,14 +97,16 @@ function ContractTypes() {
     },
   ];
 
+=======
+>>>>>>> 5983ab10049ddeec24c977d9674aaff4aedec4f2
   return (
-    <div>
-      <div>
-        <h2 className="border-bottom mb-2">Shartnoma berish</h2>
-        <ToastMsg />
-        <DataTables columns={columns} data={contracts.body} />
-        <ContractModal />
-      </div>
+    <div className="contracts">
+      <h2 className="border-bottom mb-4 bp-2">Sharnoma berish</h2>
+      <Row>
+        <Col><h4 className="border-bottom"><NavLink Link style={{ color: "#333 !important" }} to="receive">Sharnoma olganlar</NavLink></h4></Col>
+        <Col><h4 className="border-bottom"><NavLink to="notreceive">Sharnoma olmaganlar</NavLink></h4></Col>
+      </Row>
+      <Outlet />
     </div>
   );
 }

@@ -1,14 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../../components/axios/Axios";
 
-const getAsync = createAsyncThunk("directonsTypes/getDirections", (data) => {
+const getAsync = createAsyncThunk("monitoringSlice/getCont", (data) => {
   return axios
     .get(data.path, {
       headers: {
         Authorization: "Bearer " + data.token,
       },
     })
-    .then((res) => res.data)
+    .then((res) => {
+      return res.data;
+    })
     .catch((error) => error.response.statusText);
 });
 

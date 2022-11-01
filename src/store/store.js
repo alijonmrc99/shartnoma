@@ -8,6 +8,7 @@ import directionSlice from "./reduser/directions/directionSlice";
 import usersSlice from "./reduser/user/usersSlice";
 import contractsTypesSlice from "./reduser/contract/contractsSlice";
 import contractSlice from "./reduser/contract/contractSlice";
+import monitoringSlice from "./reduser/monitoring/monitoringSlice";
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     direction: directionSlice,
     contracts: contractsTypesSlice,
     contract: contractSlice,
+    monitoring: monitoringSlice,
   },
 });

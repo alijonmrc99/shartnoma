@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif !important;
@@ -28,13 +29,16 @@ a {
   background-color: #367fa9 !important;
   border: 1px solid #367fa9 !important;
 }
+
 .peremium-btn:hover {
   background-color: #307096 !important;
 }
+
 .success-btn {
   background-color: #00a65a !important;
   border: 1px solid #008d4c !important;
 }
+
 .success-btn:hover {
   background-color: #059654 !important;
 }
@@ -47,4 +51,17 @@ a {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* contracts companentasi uchun stillar */
+
+.contracts a {
+  color: #212529 !important;
+  padding: 7px 15px;
+  display: block;
+}
+
+.contracts .active {
+  background-color: #00a65a;
+  color: #f1f1f1 !important;
 }
