@@ -4,9 +4,6 @@ import axios from "../../../../components/axios/Axios";
 const createAsync = createAsyncThunk(
   "monitoringSlice/createContractAsync",
   (data) => {
-
-    delete data.body.id;
-
     console.log(data.body);
     return axios
       .post(

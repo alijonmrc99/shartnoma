@@ -11,6 +11,8 @@ import ConfirmModal from "../components/Modalls/ConfirmModal";
 import { useCookies } from "react-cookie";
 import createExcel from "../components/CreateExcell/createExcell";
 import getAsync from "../store/reduser/monitoring/actions/getData";
+import getAsync1 from "../store/reduser/contract/actions/getData";
+import PaidContractModal from "../components/Modalls/paidContractModal";
 
 // import ConfirmModal from "../Modalls/ConfirmModal";
 
@@ -18,9 +20,11 @@ function Monitoring() {
     const dispatch = useDispatch();
     const [cookie] = useCookies();
     const data = useSelector((store) => store.monitoring);
+    const users = useSelector((store) => store.contracts);
 
     useEffect(() => {
         dispatch(getAsync({ token: cookie.userToken, path: "paid-contract-fees?populate=*" }));
+        dispatch(getAsync1({ token: cookie.userToken, path: "contracts?populate=*" }));
     }, []);
 
     const handleShow = (e) => {
@@ -39,7 +43,7 @@ function Monitoring() {
             name: "#",
             selector: (row) => row.id,
             sortable: true,
-            width: "3rem",
+            width: "4rem",
         },
         {
             name: "F.I.SH",
@@ -61,23 +65,13 @@ function Monitoring() {
             selector: (row) => row.attributes.payed_date,
         },
 
-        // {
-        //     name: "Viloyati",
-        //     selector: (row) =>
-        //         regions.find((item) => item.id == row.attributes.region)?.name,
-        // },
-        // {
-        //     name: "Tumani",
-        //     selector: (row) =>
-        //         district.find((item) => item.id == row.attributes.district)?.name,
-        // },
 
         {
             name: "Harakatlar",
             width: "130px",
             selector: (row) => (
                 <div>
-                    <Button id={row.id} onClick={handleShow} className="success-btn">
+                    <Button id={row.id} className="success-btn">
                         <i className="bi bi-eye-fill" />
                     </Button>
                 </div>
@@ -103,9 +97,8 @@ function Monitoring() {
                     yuklash
                 </Button>
             </div>
-            <ToastMsg />
             <DataTables columns={columns} data={data.body.data} />
-            <UserActions />
+            <PaidContractModal users={users} />
         </div>
     );
 }
