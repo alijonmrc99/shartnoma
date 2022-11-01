@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
 import DataTables from "../components/table/dataTable";
 import { Button } from "react-bootstrap";
-import zipcelx from "zipcelx";
-import ToastMsg from "../components/toasts/ToastMsg";
-import UserActions from "../components/Modalls/userModal";
 import { useDispatch, useSelector } from "react-redux";
 import { userModalToggle } from "../store/reduser/menu/menuSlice";
 import { defaultUser, selectedUser } from "../store/reduser/user/userSlice";
-import ConfirmModal from "../components/Modalls/ConfirmModal";
 import { useCookies } from "react-cookie";
 import createExcel from "../components/CreateExcell/createExcell";
 import getAsync from "../store/reduser/monitoring/actions/getData";
@@ -27,12 +23,12 @@ function Monitoring() {
         dispatch(getAsync1({ token: cookie.userToken, path: "contracts?populate=*" }));
     }, []);
 
-    const handleShow = (e) => {
-        dispatch(
-            selectedUser(data.body.data.find((user) => user.id == e.currentTarget.id))
-        );
-        dispatch(userModalToggle(true));
-    };
+    // const handleShow = (e) => {
+    //     dispatch(
+    //         selectedUser(data.body.data.find((user) => user.id == e.currentTarget.id))
+    //     );
+    //     dispatch(userModalToggle(true));
+    // };
 
     const makeExcell = () => {
         createExcel(data.body.data);
@@ -48,7 +44,6 @@ function Monitoring() {
         {
             name: "F.I.SH",
             selector: (row) => `${row?.attributes?.student.data?.attributes?.First_name} ${row?.attributes?.student.data?.attributes?.Last_name}`,
-
             sortable: true,
             width: "300px",
         },
