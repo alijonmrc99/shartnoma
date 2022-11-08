@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
+import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, Outlet } from "react-router-dom";
-
+import getAsync from "../store/reduser/contract/actions/getData"
+import { Button } from 'react-bootstrap';
+import ConfirmModal from '../components/Modalls/ConfirmModal'
+import { selectedContr, defaultContr } from '../store/reduser/contract/contractSlice'
+import contractModalToggle from '../store/reduser/menu/menuSlice'
 function ContractTypes() {
-<<<<<<< HEAD
+
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const contracts = useSelector((store) => store.contracts);
@@ -85,7 +91,6 @@ function ContractTypes() {
             <ConfirmModal
               id={row.id}
               path={`contracts/${row.contract_id}`}
-              toast={toast}
             />
             {/* <CreateQRCode id={row.id} /> */}
           </>
@@ -97,8 +102,6 @@ function ContractTypes() {
     },
   ];
 
-=======
->>>>>>> 5983ab10049ddeec24c977d9674aaff4aedec4f2
   return (
     <div className="contracts">
       <h2 className="border-bottom mb-4 bp-2">Sharnoma berish</h2>
