@@ -1,5 +1,5 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://shartnoma.samtuit.uz/api";
+axios.defaults.baseURL = "http://api.kontraktmalaka.uz/api";
 
 export default axios;
