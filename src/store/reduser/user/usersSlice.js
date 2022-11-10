@@ -29,6 +29,7 @@ export const usersSlice = createSlice({
       state.loading = true;
     },
     [createAsync.fulfilled]: (state, actions) => {
+      console.log(actions.payload.data);
       state.loading = false;
       state.body.data.push(actions.payload.data);
       state.failed = "";
