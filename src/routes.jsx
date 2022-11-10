@@ -19,7 +19,7 @@ function Router() {
       <Route path="/" element={<Protected />}>
         <Route index element={<Navigate to="home" replace={true} />} />
         <Route path="shartnomalar" element={<Outlet />}>
-          <Route path=":id" element={<CreateQRCode />} />
+          {/* <Route path=":id" element={<CreateQRCode />} /> */}
         </Route>
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />

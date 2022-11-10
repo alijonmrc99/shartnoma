@@ -6,7 +6,7 @@ import DataTables from "../table/dataTable";
 import ContractModal from "../Modalls/conractModal";
 import { contractModalToggle } from "../../store/reduser/menu/menuSlice";
 import { defaultContr } from "../../store/reduser/contract/contractSlice";
-import axios from "axios";
+import axios from "../../components/axios/Axios";
 
 function NotReceive() {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function NotReceive() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get("https://shartnoma.samtuit.uz/api/olganlar", {
+        axios.get("/olganlar", {
             headers: {
                 Authorization: "Bearer " + cookie.userToken,
             },

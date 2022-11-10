@@ -45,13 +45,18 @@ export const contractsTypesSlice = createSlice({
     },
     [editAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(actions.payload.data.attributes.contract_type.data.attributes.direction);
+      console.log(
+        actions.payload.data.attributes.contract_type.data.attributes.direction
+      );
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
           state.body.data[index].attributes.beginning_date =
             actions.payload.data.attributes.beginning_date;
-          state.body.data[index].attributes.due_date = actions.payload.data.attributes.due_date;
-          state.body.data[index].attributes.contract_type.data.attributes.direction =
+          state.body.data[index].attributes.due_date =
+            actions.payload.data.attributes.due_date;
+          state.body.data[
+            index
+          ].attributes.contract_type.data.attributes.direction =
             actions.payload.data.attributes.contract_type.data.attributes.direction;
           state.body.data[index].attributes.contract_number =
             actions.payload.data.attributes.contract_number;
@@ -72,10 +77,8 @@ export const contractsTypesSlice = createSlice({
     [deleteAsync.fulfilled]: (state, actions) => {
       state.loading = false;
       state.body.data = state.body.data.filter((item) => {
-        console.log(+item.id !== actions.payload.id);
-        return +item.id !== actions.payload.id
-      }
-      );
+        return +item.id !== actions.payload.id;
+      });
       state.failed = "";
     },
     [deleteAsync.rejected]: (state, actions) => {

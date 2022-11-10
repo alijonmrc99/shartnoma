@@ -14,7 +14,6 @@ export const contractSlice = createSlice({
   initialState,
   reducers: {
     defaultContr: (state, actions) => {
-      console.log(actions.payload);
       let data = { ...initialState };
       data.student = actions.payload;
       return data;

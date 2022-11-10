@@ -4,10 +4,8 @@ import axios from "../../../../components/axios/Axios";
 const createAsync = createAsyncThunk(
   "contractsTypes/createContractAsync",
   (data) => {
-
     delete data.body.id;
 
-    console.log(data.body);
     return axios
       .post(
         data.path,
@@ -18,7 +16,10 @@ const createAsync = createAsyncThunk(
           },
         }
       )
-      .then((res) => ({ body: res.data, id: data.body.student }))
+      .then((res) => {
+        console.log(res.data, data.body.student);
+        return { body: res.data, id: data.body.student };
+      })
       .catch((error) => error.response.statusText);
   }
 );
