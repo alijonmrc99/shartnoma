@@ -9,22 +9,24 @@ import { useCookies } from "react-cookie";
 import createAsync from "../../store/reduser/contract/actions/create";
 import editAsync from "../../store/reduser/contract/actions/edit";
 import getAsync from "../../store/reduser/directions/actions/getData";
+import axios from "axios";
 
 function ContractModal() {
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-
-
-  useEffect(() => {
-    directions.body.length === 0 &&
-      dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
-  }, []);
 
   const directions = useSelector((store) => store.directionTypes);
   const show = useSelector((store) => store.menu.contractModalToggler);
   const initialData = useSelector((store) => store.contract);
 
   const [contract, setContract] = useState(initialData);
+
+  useEffect(() => {
+    directions.body.length === 0 &&
+      dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
+  }, [dispatch, cookie.userToken, directions.body.length]);
+
+
 
   const handleClose = () => {
     dispatch(contractModalToggle(false))
@@ -43,7 +45,8 @@ function ContractModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(contract);
+    // File backenddan fayni o'chirish
+    axios.delete("http://localhost:3001/api/makepdf/" + initialData.id)
     initialData.id
       ? dispatch(
         editAsync({
@@ -73,7 +76,7 @@ function ContractModal() {
       >
         <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Yo'nalish yaratish</Modal.Title>
+            <Modal.Title>Yo'nalishga biriktirish</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Container>

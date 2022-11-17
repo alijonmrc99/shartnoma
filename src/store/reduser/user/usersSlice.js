@@ -29,7 +29,6 @@ export const usersSlice = createSlice({
       state.loading = true;
     },
     [createAsync.fulfilled]: (state, actions) => {
-      console.log(actions.payload.data);
       state.loading = false;
       state.body.data.push(actions.payload.data);
       state.failed = "";
@@ -44,7 +43,6 @@ export const usersSlice = createSlice({
     },
     [editAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(state);
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
           state.body.data[index].attributes.First_name =
@@ -67,7 +65,6 @@ export const usersSlice = createSlice({
       state.failed = "";
     },
     [editAsync.rejected]: (state, actions) => {
-      console.log(actions);
       state.loading = false;
       state.failed = actions.payload;
     },

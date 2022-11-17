@@ -16,10 +16,7 @@ const editAsync = createAsyncThunk(
           },
         }
       )
-      .then((res) => {
-        console.log(res.data);
-        return res.data;
-      })
+      .then((res) => res.data)
       .catch((error) => {
         console.log(error);
       });

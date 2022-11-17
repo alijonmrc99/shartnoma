@@ -3,7 +3,7 @@ import DataTables from "../components/table/dataTable";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { userModalToggle } from "../store/reduser/menu/menuSlice";
-import { defaultUser, selectedUser } from "../store/reduser/user/userSlice";
+import { defaultUser } from "../store/reduser/user/userSlice";
 import { useCookies } from "react-cookie";
 import createExcel from "../components/CreateExcell/createExcell";
 import getAsync from "../store/reduser/monitoring/actions/getData";
@@ -21,7 +21,7 @@ function Monitoring() {
     useEffect(() => {
         dispatch(getAsync({ token: cookie.userToken, path: "paid-contract-fees?populate=*" }));
         dispatch(getAsync1({ token: cookie.userToken, path: "contracts?populate=*" }));
-    }, []);
+    }, [dispatch, cookie.userToken]);
 
     // const handleShow = (e) => {
     //     dispatch(
@@ -43,7 +43,7 @@ function Monitoring() {
         },
         {
             name: "F.I.SH",
-            selector: (row) => `${row?.attributes?.student.data?.attributes?.First_name} ${row?.attributes?.student.data?.attributes?.Last_name}`,
+            selector: (row) => `${row?.attributes?.student.data?.attributes?.First_name} ${row?.attributes?.student.data?.attributes?.Last_name} ${row?.attributes?.student.data?.attributes?.Fathers_name}`,
             sortable: true,
             width: "300px",
         },
@@ -81,11 +81,11 @@ function Monitoring() {
 
     return (
         <div>
-            <h2 className="border-bottom mb-2">Talabalar ro'yaxti</h2>
+            <h2 className="border-bottom mb-2">To'lovlar ro'yaxti</h2>
             <div className="actions mb-2 d-flex justify-content-end">
                 <Button className="peremium-btn me-2" onClick={defaultShow}>
                     <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
-                    Foydalanuvchi qo'shish
+                    To'lov qo'shish
                 </Button>
                 <Button className="peremium-btn" onClick={makeExcell}>
                     <i style={{ color: "" }} className="bi bi-filetype-xlsx"></i> Excelda

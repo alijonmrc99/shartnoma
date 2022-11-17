@@ -9,12 +9,13 @@ import createAsync from "../../store/reduser/monitoring/actions/create";
 import { useRef } from "react";
 
 function PaidContractModal({ users }) {
-  console.log(users);
   const show = useSelector((state) => state.menu.userModalTogler);
   const studentId = useRef()
   if (users)
     users = users?.body?.data?.map(item => ({
-      username: item.attributes.student.data.attributes.First_name + " " + item.attributes.student.data.attributes.Last_name,
+      username: item.attributes.student.data.attributes.First_name +
+        " " + item.attributes.student.data.attributes.Last_name +
+        " " + item.attributes.student.data.attributes.Fathers_name,
       id: item.attributes.student.data.id + "," + item.id
     }))
   const [user, setUser] = useState({

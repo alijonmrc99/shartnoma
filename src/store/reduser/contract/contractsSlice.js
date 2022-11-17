@@ -30,7 +30,6 @@ export const contractsTypesSlice = createSlice({
     },
     [createAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(actions.payload.body.data);
       state.body.data.push(actions.payload.body.data);
 
       state.failed = "";
@@ -45,9 +44,6 @@ export const contractsTypesSlice = createSlice({
     },
     [editAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(
-        actions.payload.data.attributes.contract_type.data.attributes.direction
-      );
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
           state.body.data[index].attributes.beginning_date =
@@ -66,7 +62,6 @@ export const contractsTypesSlice = createSlice({
       state.failed = "";
     },
     [editAsync.rejected]: (state, actions) => {
-      console.log(actions);
       state.loading = false;
       state.failed = actions.payload;
     },
