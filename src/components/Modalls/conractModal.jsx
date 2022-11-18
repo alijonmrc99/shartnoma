@@ -10,6 +10,7 @@ import createAsync from "../../store/reduser/contract/actions/create";
 import editAsync from "../../store/reduser/contract/actions/edit";
 import getAsync from "../../store/reduser/directions/actions/getData";
 import axios from "axios";
+import { PDF_API } from "../../store/reduser/initailState";
 
 function ContractModal() {
   const dispatch = useDispatch();
@@ -26,10 +27,8 @@ function ContractModal() {
       dispatch(getAsync({ token: cookie.userToken, path: "contract-types" }));
   }, [dispatch, cookie.userToken, directions.body.length]);
 
-
-
   const handleClose = () => {
-    dispatch(contractModalToggle(false))
+    dispatch(contractModalToggle(false));
   };
 
   useEffect(() => {
@@ -45,24 +44,22 @@ function ContractModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // File backenddan fayni o'chirish
-    axios.delete("http://localhost:3001/api/makepdf/" + initialData.id)
     initialData.id
       ? dispatch(
-        editAsync({
-          token: cookie.userToken,
-          body: contract,
-          path: "contracts/" + initialData.id + "?populate=*",
-        })
-      )
+          editAsync({
+            token: cookie.userToken,
+            body: contract,
+            path: "contracts/" + initialData.id + "?populate=*",
+          })
+        )
       : dispatch(
-        createAsync({
-          token: cookie.userToken,
-          body: contract,
-          path: "/contracts?populate=*",
-        })
-      );
-    handleClose()
+          createAsync({
+            token: cookie.userToken,
+            body: contract,
+            path: "/contracts?populate=*",
+          })
+        );
+    handleClose();
     setContract(initialData);
   }
   return (

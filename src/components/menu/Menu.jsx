@@ -21,16 +21,17 @@ function Menu() {
           </Link>
         </li>
         <li>
+          <Link to="directions">
+            <i className="bi me-2 bi-file-earmark-medical-fill"></i>Yo'nalishlar
+          </Link>
+        </li>
+        <li>
           <Link to="contracts">
             <i className="bi me-2 bi-file-earmark-medical-fill"></i>Shartnoma
             berish
           </Link>
         </li>
-        <li>
-          <Link to="directions">
-            <i className="bi me-2 bi-file-earmark-medical-fill"></i>Yo'nalishlar
-          </Link>
-        </li>
+
         <li>
           <Link to="monitoring">
             <i className="bi me-2 bi-pie-chart-fill"></i>To'lov monitoring

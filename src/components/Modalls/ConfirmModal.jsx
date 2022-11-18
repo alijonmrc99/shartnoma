@@ -8,6 +8,7 @@ import deleteDirectionAsync from "../../store/reduser/directions/actions/delete"
 import ToastMsg from "../toasts/ToastMsg";
 import deleteContractAsync from "../../store/reduser/contract/actions/delete";
 import axios from "axios";
+import { PDF_API } from "../../store/reduser/initailState";
 
 function ConfirmModal({ path, id }) {
   const [show, setShow] = useState(false);
@@ -29,14 +30,14 @@ function ConfirmModal({ path, id }) {
         break;
       }
       case "contracts": {
-        axios.delete("http://localhost:3001/api/makepdf/" + id,)
+        axios.delete(PDF_API + "/" + id);
         dispatch(
           deleteContractAsync({ path: path, token: cookie.userToken, id })
         );
         break;
       }
       default: {
-        return 0
+        return 0;
       }
     }
   };
