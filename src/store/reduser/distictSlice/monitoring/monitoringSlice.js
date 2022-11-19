@@ -6,8 +6,8 @@ import getAsync from "./actions/getData";
 import createAsync from "./actions/create";
 import editAsync from "./actions/edit";
 
-export const monitoringSlice = createSlice({
-  name: "monitoringSlice",
+export const contractsTypesSlice = createSlice({
+  name: "payedSlice",
   initialState: initialState,
 
   extraReducers: {
@@ -75,4 +75,4 @@ export const monitoringSlice = createSlice({
   },
 });
 
-export default monitoringSlice.reducer;
+export default contractsTypesSlice.reducer;

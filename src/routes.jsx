@@ -8,11 +8,10 @@ import Home from "./components/Home/Home";
 import Students from "./pages/Students";
 import DirectionTypes from "./pages/DirectionTypes";
 import ContractTypes from "./pages/ContractType";
-import CreateQRCode from "./components/qrCode/createQRCode";
 import Receive from "./components/AllContracts/received";
 import NotReceive from "./components/AllContracts/notRecive";
 import Monitoring from "./pages/Monitoring";
-import PaiedStudents from "./pages/PaiedStudents";
+import PayedStudents from "./pages/PayedStudents";
 
 function Router() {
   return (
@@ -25,7 +24,7 @@ function Router() {
           <Route path="directions" element={<DirectionTypes />} />
           <Route path="monitoring" element={<Outlet />}>
             <Route index element={<Monitoring />} />
-            <Route path=":studentId" element={<PaiedStudents />} />
+            <Route path=":studentId" element={<PayedStudents />} />
           </Route>
 
           <Route path="contracts" element={<ContractTypes />}>

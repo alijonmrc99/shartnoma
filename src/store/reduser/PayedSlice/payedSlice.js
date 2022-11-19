@@ -6,8 +6,8 @@ import getAsync from "./actions/getData";
 import createAsync from "./actions/create";
 import editAsync from "./actions/edit";
 
-export const monitoringSlice = createSlice({
-  name: "monitoringSlice",
+export const payedSlice = createSlice({
+  name: "payedSlice",
   initialState: initialState,
 
   extraReducers: {
@@ -25,19 +25,19 @@ export const monitoringSlice = createSlice({
       state.failed = actions.payload;
     },
 
-    // [createAsync.pending]: (state) => {
-    //   state.loading = true;
-    // },
-    // [createAsync.fulfilled]: (state, actions) => {
-    //   state.loading = false;
-    //   state.body.data.push(actions.payload.body.data);
+    [createAsync.pending]: (state) => {
+      state.loading = true;
+    },
+    [createAsync.fulfilled]: (state, actions) => {
+      state.loading = false;
+      state.body.data.push(actions.payload.body.data);
 
-    //   state.failed = "";
-    // },
-    // [createAsync.rejected]: (state, actions) => {
-    //   state.loading = false;
-    //   state.failed = actions.payload;
-    // },
+      state.failed = "";
+    },
+    [createAsync.rejected]: (state, actions) => {
+      state.loading = false;
+      state.failed = actions.payload;
+    },
 
     [editAsync.pending]: (state) => {
       state.loading = true;
@@ -75,4 +75,4 @@ export const monitoringSlice = createSlice({
   },
 });
 
-export default monitoringSlice.reducer;
+export default payedSlice.reducer;

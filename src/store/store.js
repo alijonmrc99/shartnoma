@@ -9,6 +9,7 @@ import usersSlice from "./reduser/user/usersSlice";
 import contractsTypesSlice from "./reduser/contract/contractsSlice";
 import contractSlice from "./reduser/contract/contractSlice";
 import monitoringSlice from "./reduser/monitoring/monitoringSlice";
+import payedSlice from "./reduser/PayedSlice/payedSlice";
 
 export default configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export default configureStore({
     contracts: contractsTypesSlice,
     contract: contractSlice,
     monitoring: monitoringSlice,
+    payedStudets: payedSlice,
   },
 });

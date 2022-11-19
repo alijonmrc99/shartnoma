@@ -5,20 +5,23 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
-import createAsync from "../../store/reduser/monitoring/actions/create";
+import createAsync from "../../store/reduser/PayedSlice/actions/create";
 import { useRef } from "react";
-import getAsync from "../../store/reduser/monitoring/actions/getData";
+import getAsync from "../../store/reduser/PayedSlice/actions/getData";
 
 function PaidContractModal({ users }) {
   const show = useSelector((state) => state.menu.userModalTogler);
-  const studentId = useRef()
+  const studentId = useRef();
   if (users)
-    users = users?.body?.data?.map(item => ({
-      username: item.attributes.student.data.attributes.First_name +
-        " " + item.attributes.student.data.attributes.Last_name +
-        " " + item.attributes.student.data.attributes.Fathers_name,
-      id: item.attributes.student.data.id + "," + item.id
-    }))
+    users = users?.body?.data?.map((item) => ({
+      username:
+        item.attributes.student.data.attributes.First_name +
+        " " +
+        item.attributes.student.data.attributes.Last_name +
+        " " +
+        item.attributes.student.data.attributes.Fathers_name,
+      id: item.attributes.student.data.id + "," + item.id,
+    }));
   const [user, setUser] = useState({
     check_number: "",
     summa: "",
@@ -33,14 +36,10 @@ function PaidContractModal({ users }) {
   const dispatch = useDispatch();
   const handleClose = () => dispatch(userModalToggle(false));
 
-  useEffect(() => {
-
-  }, []);
-
   function handleChange(e) {
     setUser({
       ...user,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -53,13 +52,13 @@ function PaidContractModal({ users }) {
         body: {
           ...user,
           student: { id: stundetId },
-          contract: { id: contractId }
+          contract: { id: contractId },
         },
         path: "paid-contract-fees?populate=*",
       })
     );
     window.location.reload();
-    dispatch(getAsync({ token: cookie.userToken, path: "/payment" }))
+    dispatch(getAsync({ token: cookie.userToken, path: "/payment" }));
     setUser({
       check_number: "",
       summa: "",
@@ -67,7 +66,7 @@ function PaidContractModal({ users }) {
       payed_date: "",
       student: "",
       contract: "",
-    })
+    });
     dispatch(userModalToggle(false));
   }
 
@@ -88,7 +87,6 @@ function PaidContractModal({ users }) {
           <Modal.Body>
             <Container>
               <Row>
-
                 <Col>
                   <Form.Group
                     className="mb-3"
@@ -160,7 +158,6 @@ function PaidContractModal({ users }) {
                     />
                   </Form.Group>
                 </Col>
-
               </Row>
             </Container>
           </Modal.Body>

@@ -6,32 +6,37 @@ import { userModalToggle } from "../store/reduser/menu/menuSlice";
 import { defaultUser } from "../store/reduser/user/userSlice";
 import { useCookies } from "react-cookie";
 import createExcel from "../components/CreateExcell/createExcell";
-import getAsync from "../store/reduser/monitoring/actions/getData";
+import getAsync from "../store/reduser/PayedSlice/actions/getData";
 import getAsync1 from "../store/reduser/contract/actions/getData";
 import PaidContractModal from "../components/Modalls/paidContractModal";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 // import ConfirmModal from "../Modalls/ConfirmModal";
 
 function Monitoring() {
+  const { studentId } = useParams();
   const dispatch = useDispatch();
   const [cookie] = useCookies();
-  const data = useSelector((store) => store.monitoring);
-  const haveConractUsers = useSelector((store) => store.contracts);
+  const data = useSelector((store) => store.payedStudets);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    dispatch(getAsync({ token: cookie.userToken, path: "payment" }));
     dispatch(
-      getAsync1({ token: cookie.userToken, path: "contracts?populate=*" })
+      getAsync({
+        token: cookie.userToken,
+        path: `/paid-contract-fees?filters[student][id][$eq]=${studentId}&populate=*`,
+      })
     );
   }, [dispatch, cookie.userToken]);
-
-  // const handleShow = (e) => {
-  //     dispatch(
-  //         selectedUser(data.body.data.find((user) => user.id == e.currentTarget.id))
-  //     );
-  //     dispatch(userModalToggle(true));
-  // };
+  let summ = 0;
+  useEffect(() => {
+    data?.body?.data?.forEach((item) => {
+      summ += +item.attributes.summa;
+      setTotal(summ);
+    });
+    // return setTotal(0);
+  }, []);
 
   const makeExcell = () => {
     createExcel(data.body.data);
@@ -39,38 +44,25 @@ function Monitoring() {
 
   const columns = [
     {
-      name: "#",
-      selector: (row) => row.student_id,
-      sortable: true,
-      width: "4rem",
+      name: "Chek raqami",
+      selector: (row) => row.attributes.check_number,
     },
     {
-      name: "F.I.SH",
-      selector: (row) =>
-        `${row?.first_name} ${row?.last_name} ${row?.fathers_name}`,
-      sortable: true,
-      width: "300px",
+      name: "Summasi",
+      selector: (row) => row.attributes.summa,
     },
     {
-      name: "Passport raqami",
-      selector: (row) => row.passport,
-    },
-    {
-      name: "Telefon raqami",
-      selector: (row) => row.phone,
+      name: "Izoh",
+      selector: (row) => row.attributes.comment,
     },
     {
       name: "Harakatlar",
       width: "130px",
       selector: (row) => (
         <div>
-          <Link
-            to={row.student_id.toString()}
-            id={row.student_id}
-            className="success-btn btn border-0 rounded-0"
-          >
+          <Button id={row.student_id} className="success-btn">
             <i className="bi bi-eye-fill" />
-          </Link>
+          </Button>
         </div>
       ),
     },
@@ -94,8 +86,15 @@ function Monitoring() {
           yuklash
         </Button>
       </div>
-      <DataTables columns={columns} data={data.body} />
-      <PaidContractModal users={haveConractUsers} />
+      <div>
+        <h4>
+          {/* {data.body.length !==
+            0`${data?.body?.data[0]?.attributes?.student?.data?.attributes?.First_name} ning to'lovlari haqida ma'lumot`} */}
+        </h4>
+      </div>
+      <div>Jami to'lagan: {summ}</div>
+      <DataTables columns={columns} data={data?.body?.data} />
+      {/* <PaidContractModal /> */}
     </div>
   );
 }
