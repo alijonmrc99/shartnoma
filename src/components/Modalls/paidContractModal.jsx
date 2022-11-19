@@ -7,6 +7,7 @@ import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
 import createAsync from "../../store/reduser/monitoring/actions/create";
 import { useRef } from "react";
+import getAsync from "../../store/reduser/monitoring/actions/getData";
 
 function PaidContractModal({ users }) {
   const show = useSelector((state) => state.menu.userModalTogler);
@@ -37,27 +38,10 @@ function PaidContractModal({ users }) {
   }, []);
 
   function handleChange(e) {
-    // let attributes = user;
-    // attributes = {
-    //   ...attributes,
-    //   [e.target.name]: e.target.value,
-    // };
-    // if (e.target.name === "contract") {
-    //   const [contractId, studentId] = e.target.value.split(",")
-
-    //   setUser({
-    //     ...user,
-    //     student: { "id": studentId },
-    //     contract: { "id": contractId }
-    //   });
-    // } else {
     setUser({
       ...user,
       [e.target.name]: e.target.value
     });
-    // }
-
-
   }
 
   function handleSubmit(e) {
@@ -74,6 +58,8 @@ function PaidContractModal({ users }) {
         path: "paid-contract-fees?populate=*",
       })
     );
+    window.location.reload();
+    dispatch(getAsync({ token: cookie.userToken, path: "/payment" }))
     setUser({
       check_number: "",
       summa: "",

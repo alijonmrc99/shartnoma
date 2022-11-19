@@ -16,10 +16,10 @@ function Monitoring() {
     const dispatch = useDispatch();
     const [cookie] = useCookies();
     const data = useSelector((store) => store.monitoring);
-    const users = useSelector((store) => store.contracts);
+    const haveConractUsers = useSelector((store) => store.contracts);
 
     useEffect(() => {
-        dispatch(getAsync({ token: cookie.userToken, path: "paid-contract-fees?populate=*" }));
+        dispatch(getAsync({ token: cookie.userToken, path: "payment" }));
         dispatch(getAsync1({ token: cookie.userToken, path: "contracts?populate=*" }));
     }, [dispatch, cookie.userToken]);
 
@@ -37,36 +37,31 @@ function Monitoring() {
     const columns = [
         {
             name: "#",
-            selector: (row) => row.id,
+            selector: (row) => row.student_id,
             sortable: true,
             width: "4rem",
         },
         {
             name: "F.I.SH",
-            selector: (row) => `${row?.attributes?.student.data?.attributes?.First_name} ${row?.attributes?.student.data?.attributes?.Last_name} ${row?.attributes?.student.data?.attributes?.Fathers_name}`,
+            selector: (row) => `${row?.first_name} ${row?.last_name} ${row?.fathers_name}`,
             sortable: true,
             width: "300px",
         },
         {
             name: "Chek raqami",
-            selector: (row) => row.attributes.check_number,
+            selector: (row) => row.passport,
         },
         {
             name: "To'lagan summasi",
-            selector: (row) => row.attributes.summa,
+            selector: (row) => row.phone,
         },
-        {
-            name: "To'lagan sanasi",
-            selector: (row) => row.attributes.payed_date,
-        },
-
 
         {
             name: "Harakatlar",
             width: "130px",
             selector: (row) => (
                 <div>
-                    <Button id={row.id} className="success-btn">
+                    <Button id={row.student_id} className="success-btn">
                         <i className="bi bi-eye-fill" />
                     </Button>
                 </div>
@@ -92,8 +87,8 @@ function Monitoring() {
                     yuklash
                 </Button>
             </div>
-            <DataTables columns={columns} data={data.body.data} />
-            <PaidContractModal users={users} />
+            <DataTables columns={columns} data={data.body} />
+            <PaidContractModal users={haveConractUsers} />
         </div>
     );
 }

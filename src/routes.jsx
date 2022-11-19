@@ -12,20 +12,22 @@ import CreateQRCode from "./components/qrCode/createQRCode";
 import Receive from "./components/AllContracts/received";
 import NotReceive from "./components/AllContracts/notRecive";
 import Monitoring from "./pages/Monitoring";
+import PaiedStudents from "./pages/PaiedStudents";
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Protected />}>
         <Route index element={<Navigate to="home" replace={true} />} />
-        <Route path="shartnomalar" element={<Outlet />}>
-          {/* <Route path=":id" element={<CreateQRCode />} /> */}
-        </Route>
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />
           <Route path="students" element={<Students />} />
           <Route path="directions" element={<DirectionTypes />} />
-          <Route path="monitoring" element={<Monitoring />} />
+          <Route path="monitoring" element={<Outlet />}>
+            <Route index element={<Monitoring />} />
+            <Route path=":studentId" element={<PaiedStudents />} />
+          </Route>
+
           <Route path="contracts" element={<ContractTypes />}>
             <Route index element={<Navigate to="receive" />} />
             <Route path="receive" element={<Receive />} />

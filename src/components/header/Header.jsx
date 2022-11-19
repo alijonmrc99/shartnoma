@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { exitToggle, menuToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
 
-export default function Header({ username = "Alijon Kuvondikov N" }) {
+export default function Header({ username = "Not User Name" }) {
   const [, , removeCookie] = useCookies();
   const dispatch = useDispatch();
   const menu = useSelector((state) => state.menu);
@@ -51,7 +51,7 @@ export default function Header({ username = "Alijon Kuvondikov N" }) {
             {notUserImg}
           </div>
           <p className="m-0 ms-2">
-            {name && name[0] + " " + name[1][0] + "." + name[2][0]}
+            {name[0] + " " + name[1][0] + (name[2]?.charAt(0) ? "." + name[2]?.charAt(0) : "")}
             <i className="bi d-inline-block ms-3 bi-chevron-down"></i>
           </p>
           <button

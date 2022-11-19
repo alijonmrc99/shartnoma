@@ -45,20 +45,7 @@ export const usersSlice = createSlice({
       state.loading = false;
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
-          state.body.data[index].attributes.First_name =
-            actions.payload.data.attributes.First_name;
-          state.body.data[index].attributes.Last_name =
-            actions.payload.data.attributes.Last_name;
-          state.body.data[index].attributes.Fathers_name =
-            actions.payload.data.attributes.Fathers_name;
-          state.body.data[index].attributes.passport =
-            actions.payload.data.attributes.passport;
-          state.body.data[index].attributes.phone =
-            actions.payload.data.attributes.phone;
-          state.body.data[index].attributes.district =
-            actions.payload.data.attributes.district;
-          state.body.data[index].attributes.region =
-            actions.payload.data.attributes.region;
+          state.body.data[index].attributes = actions.payload.data.attributes;
         }
       });
 

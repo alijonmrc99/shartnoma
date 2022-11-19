@@ -46,16 +46,8 @@ export const contractsTypesSlice = createSlice({
       state.loading = false;
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
-          state.body.data[index].attributes.beginning_date =
-            actions.payload.data.attributes.beginning_date;
-          state.body.data[index].attributes.due_date =
-            actions.payload.data.attributes.due_date;
-          state.body.data[
-            index
-          ].attributes.contract_type.data.attributes.direction =
-            actions.payload.data.attributes.contract_type.data.attributes.direction;
-          state.body.data[index].attributes.contract_number =
-            actions.payload.data.attributes.contract_number;
+          console.log(actions.payload.data.attributes);
+          state.body.data[index].attributes = actions.payload.data.attributes;
         }
       });
 

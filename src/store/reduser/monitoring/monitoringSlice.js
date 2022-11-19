@@ -25,36 +25,28 @@ export const contractsTypesSlice = createSlice({
       state.failed = actions.payload;
     },
 
-    [createAsync.pending]: (state) => {
-      state.loading = true;
-    },
-    [createAsync.fulfilled]: (state, actions) => {
-      state.loading = false;
-      console.log(actions.payload.body.data);
-      state.body.data.push(actions.payload.body.data);
+    // [createAsync.pending]: (state) => {
+    //   state.loading = true;
+    // },
+    // [createAsync.fulfilled]: (state, actions) => {
+    //   state.loading = false;
+    //   state.body.data.push(actions.payload.body.data);
 
-      state.failed = "";
-    },
-    [createAsync.rejected]: (state, actions) => {
-      state.loading = false;
-      state.failed = actions.payload;
-    },
+    //   state.failed = "";
+    // },
+    // [createAsync.rejected]: (state, actions) => {
+    //   state.loading = false;
+    //   state.failed = actions.payload;
+    // },
 
     [editAsync.pending]: (state) => {
       state.loading = true;
     },
     [editAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      console.log(actions.payload.data.attributes.contract_type.data.attributes.direction);
       state.body.data.forEach((item, index) => {
         if (item.id === actions?.payload?.data?.id) {
-          state.body.data[index].attributes.beginning_date =
-            actions.payload.data.attributes.beginning_date;
-          state.body.data[index].attributes.due_date = actions.payload.data.attributes.due_date;
-          state.body.data[index].attributes.contract_type.data.attributes.direction =
-            actions.payload.data.attributes.contract_type.data.attributes.direction;
-          state.body.data[index].attributes.contract_number =
-            actions.payload.data.attributes.contract_number;
+          state.body.data[index].attributes = actions.payload.data.attributes;
         }
       });
 
@@ -71,10 +63,8 @@ export const contractsTypesSlice = createSlice({
     },
     [deleteAsync.fulfilled]: (state, actions) => {
       state.loading = false;
-      state.body.data = state.body.data.filter((item) => {
-        console.log(+item.id !== actions.payload.id);
-        return +item.id !== actions.payload.id
-      }
+      state.body.data = state.body.data.filter(
+        (item) => +item.id !== actions.payload.id
       );
       state.failed = "";
     },

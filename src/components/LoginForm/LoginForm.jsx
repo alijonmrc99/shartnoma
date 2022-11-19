@@ -42,15 +42,13 @@ function LoginForm() {
 
     let isValid =
       validatorEmail(formData.identifier) && validatorPass(formData.password);
-    console.log(formData);
+
     if (isValid)
+
       axios
         .post("/auth/local", formData)
         .then((res) => {
-          console.log(res.data);
-
           const d = new Date();
-
           d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
           setCookies("userToken", res.data.jwt, {
             path: "/",
