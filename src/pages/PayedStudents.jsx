@@ -80,10 +80,6 @@ function PayedStudent() {
           <i style={{ color: "" }} className="bi bi-person-plus-fill"></i>{" "}
           To'lov qo'shish
         </Button>
-        <Button className="peremium-btn" onClick={makeExcell}>
-          <i style={{ color: "" }} className="bi bi-filetype-xlsx"></i> Excelda
-          yuklash
-        </Button>
       </div>
       <div>
         <h4>
