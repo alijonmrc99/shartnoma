@@ -3,13 +3,15 @@ import { Col, Row } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import getAsync from "../store/reduser/contract/actions/getData"
-import { Button } from 'react-bootstrap';
-import ConfirmModal from '../components/Modalls/ConfirmModal'
-import { selectedContr, defaultContr } from '../store/reduser/contract/contractSlice'
-import contractModalToggle from '../store/reduser/menu/menuSlice'
+import getAsync from "../store/reduser/contract/actions/getData";
+import { Button } from "react-bootstrap";
+import ConfirmModal from "../components/Modalls/ConfirmModal";
+import {
+  selectedContr,
+  defaultContr,
+} from "../store/reduser/contract/contractSlice";
+import contractModalToggle from "../store/reduser/menu/menuSlice";
 function ContractTypes() {
-
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const contracts = useSelector((store) => store.contracts);
@@ -88,10 +90,7 @@ function ContractTypes() {
             >
               <i className="bi bi-pencil-fill" />
             </Button>
-            <ConfirmModal
-              id={row.id}
-              path={`contracts/${row.contract_id}`}
-            />
+            <ConfirmModal id={row.id} path={`contracts/${row.contract_id}`} />
             {/* <CreateQRCode id={row.id} /> */}
           </>
         ) : (
@@ -104,10 +103,20 @@ function ContractTypes() {
 
   return (
     <div className="contracts">
-      <h2 className="border-bottom mb-4 bp-2">Sharnoma berish</h2>
+      <h2 className="border-bottom mb-4 bp-2">Shartnoma berish</h2>
       <Row>
-        <Col><h4 className="border-bottom"><NavLink style={{ color: "#333 !important" }} to="receive">Sharnoma olganlar</NavLink></h4></Col>
-        <Col><h4 className="border-bottom"><NavLink to="notreceive">Sharnoma olmaganlar</NavLink></h4></Col>
+        <Col>
+          <h4 className="border-bottom">
+            <NavLink style={{ color: "#333 !important" }} to="receive">
+              Shartnoma olganlar
+            </NavLink>
+          </h4>
+        </Col>
+        <Col>
+          <h4 className="border-bottom">
+            <NavLink to="notreceive">Shartnoma olmaganlar</NavLink>
+          </h4>
+        </Col>
       </Row>
       <Outlet />
     </div>
