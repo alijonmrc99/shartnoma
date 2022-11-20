@@ -5,11 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
-import createAsync from "../../store/reduser/monitoring/actions/create";
+import createAsync from "../../store/reduser/PayedSlice/actions/create";
 
 function PaidContractModal({ users }) {
   const show = useSelector((state) => state.menu.userModalTogler);
   const studentId = useRef();
+  const selectStudent = JSON.parse(localStorage.getItem("selectStudent"));
   if (users)
     users = users?.body?.data?.map((item) => ({
       username:
@@ -26,8 +27,8 @@ function PaidContractModal({ users }) {
     summa: "",
     comment: "",
     payed_date: "",
-    student: "",
-    contract: "",
+    student: {},
+    contract: {},
   });
 
   const [cookie] = useCookies();
@@ -44,7 +45,14 @@ function PaidContractModal({ users }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const [stundetId, contractId] = user.contract.split(",");
+    console.log(user.contract);
+    const [stundetId, contractId] =
+      typeof user.contract === "string"
+        ? user.contract.split(",")
+        : [
+            selectStudent.attributes?.student?.data?.id + "",
+            selectStudent?.id + "",
+          ];
     dispatch(
       createAsync({
         token: cookie.userToken,
@@ -56,7 +64,7 @@ function PaidContractModal({ users }) {
         path: "paid-contract-fees?populate=*",
       })
     );
-    window.location.reload();
+    // users && window.location.reload();
     setUser({
       check_number: "",
       summa: "",
@@ -90,23 +98,26 @@ function PaidContractModal({ users }) {
                     className="mb-3"
                     controlId="exampleForm.ControlInput1"
                   >
-                    <Form.Label>Kontrakt to'lovchini tanlang</Form.Label>
-                    <Form.Select
-                      value={user.contract}
-                      onChange={handleChange}
-                      name="contract"
-                      ref={studentId}
-                    >
-                      <option>Tanlang</option>
-                      {users?.map((user) => (
-                        <>
-                          {console.log(user.id)}
-                          <option key={user.id} value={user.id}>
-                            {user.username}
-                          </option>
-                        </>
-                      ))}
-                    </Form.Select>
+                    {users ? (
+                      <>
+                        <Form.Label>Kontrakt to'lovchini tanlang</Form.Label>
+                        <Form.Select
+                          value={user.contract}
+                          onChange={handleChange}
+                          name="contract"
+                          ref={studentId}
+                        >
+                          <option>Tanlang</option>
+                          {users?.map((user) => (
+                            <option key={user.id} value={user.id}>
+                              {user.username}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      </>
+                    ) : (
+                      <Form.Label>{`${selectStudent.attributes?.student?.data?.attributes?.First_name} ${selectStudent.attributes?.student?.data?.attributes?.Last_name}`}</Form.Label>
+                    )}
                   </Form.Group>
                   <Form.Group
                     className="mb-3"
