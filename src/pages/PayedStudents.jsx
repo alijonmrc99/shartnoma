@@ -7,20 +7,19 @@ import { defaultUser } from "../store/reduser/user/userSlice";
 import { useCookies } from "react-cookie";
 import createExcel from "../components/CreateExcell/createExcell";
 import getAsync from "../store/reduser/PayedSlice/actions/getData";
-import getAsync1 from "../store/reduser/contract/actions/getData";
 import PaidContractModal from "../components/Modalls/paidContractModal";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 // import ConfirmModal from "../Modalls/ConfirmModal";
 
-function Monitoring() {
+function PayedStudent() {
   const { studentId } = useParams();
   const dispatch = useDispatch();
   const [cookie] = useCookies();
   const data = useSelector((store) => store.payedStudets);
   const [total, setTotal] = useState(0);
-
+  const selectStudent = JSON.parse(localStorage.getItem("selectStudent"));
   useEffect(() => {
     dispatch(
       getAsync({
@@ -28,15 +27,15 @@ function Monitoring() {
         path: `/paid-contract-fees?filters[student][id][$eq]=${studentId}&populate=*`,
       })
     );
-  }, [dispatch, cookie.userToken]);
-  let summ = 0;
+  }, [dispatch, cookie.userToken, studentId]);
   useEffect(() => {
+    let summ = 0;
     data?.body?.data?.forEach((item) => {
       summ += +item.attributes.summa;
       setTotal(summ);
     });
     // return setTotal(0);
-  }, []);
+  }, [data]);
 
   const makeExcell = () => {
     createExcel(data.body.data);
@@ -88,15 +87,21 @@ function Monitoring() {
       </div>
       <div>
         <h4>
-          {/* {data.body.length !==
-            0`${data?.body?.data[0]?.attributes?.student?.data?.attributes?.First_name} ning to'lovlari haqida ma'lumot`} */}
+          {`${selectStudent.attributes?.student?.data?.attributes?.First_name} ${selectStudent.attributes?.student?.data?.attributes?.Last_name} ning to'lovlari haqida ma'lumot`}
         </h4>
       </div>
-      <div>Jami to'lagan: {summ}</div>
+      <div className="d-flex justify-content-between">
+        <span>Jami to'lagan: {total}</span>
+        <span>
+          Qolgan summasi:{" "}
+          {+selectStudent.attributes.contract_type.data.attributes.price -
+            total}
+        </span>
+      </div>
       <DataTables columns={columns} data={data?.body?.data} />
-      {/* <PaidContractModal /> */}
+      <PaidContractModal />
     </div>
   );
 }
 
-export default Monitoring;
+export default PayedStudent;

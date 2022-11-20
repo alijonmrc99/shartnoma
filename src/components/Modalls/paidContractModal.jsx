@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useRef } from "react";
 import "./main.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { userModalToggle } from "../../store/reduser/menu/menuSlice";
 import { useCookies } from "react-cookie";
-import createAsync from "../../store/reduser/PayedSlice/actions/create";
-import { useRef } from "react";
-import getAsync from "../../store/reduser/PayedSlice/actions/getData";
+import createAsync from "../../store/reduser/monitoring/actions/create";
 
 function PaidContractModal({ users }) {
   const show = useSelector((state) => state.menu.userModalTogler);
@@ -22,6 +20,7 @@ function PaidContractModal({ users }) {
         item.attributes.student.data.attributes.Fathers_name,
       id: item.attributes.student.data.id + "," + item.id,
     }));
+
   const [user, setUser] = useState({
     check_number: "",
     summa: "",
@@ -58,7 +57,6 @@ function PaidContractModal({ users }) {
       })
     );
     window.location.reload();
-    dispatch(getAsync({ token: cookie.userToken, path: "/payment" }));
     setUser({
       check_number: "",
       summa: "",
@@ -101,9 +99,12 @@ function PaidContractModal({ users }) {
                     >
                       <option>Tanlang</option>
                       {users?.map((user) => (
-                        <option key={user.id} value={user.id}>
-                          {user.username}
-                        </option>
+                        <>
+                          {console.log(user.id)}
+                          <option key={user.id} value={user.id}>
+                            {user.username}
+                          </option>
+                        </>
                       ))}
                     </Form.Select>
                   </Form.Group>

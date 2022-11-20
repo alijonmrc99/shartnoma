@@ -26,12 +26,15 @@ function Monitoring() {
     );
   }, [dispatch, cookie.userToken]);
 
-  // const handleShow = (e) => {
-  //     dispatch(
-  //         selectedUser(data.body.data.find((user) => user.id == e.currentTarget.id))
-  //     );
-  //     dispatch(userModalToggle(true));
-  // };
+  const handleShow = (e) => {
+    const id = e.currentTarget.id;
+    haveConractUsers.body.data.forEach((element) => {
+      if (+element.attributes.student.data.id === +id) {
+        localStorage.setItem("selectStudent", JSON.stringify(element));
+      }
+      console.log();
+    });
+  };
 
   const makeExcell = () => {
     createExcel(data.body.data);
@@ -63,10 +66,9 @@ function Monitoring() {
       name: "Harakatlar",
       width: "130px",
       selector: (row) => (
-        <div>
+        <div id={row.student_id} onClick={handleShow}>
           <Link
             to={row.student_id.toString()}
-            id={row.student_id}
             className="success-btn btn border-0 rounded-0"
           >
             <i className="bi bi-eye-fill" />
