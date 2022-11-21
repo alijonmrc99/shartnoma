@@ -50,9 +50,9 @@ function PaidContractModal({ users }) {
       typeof user.contract === "string"
         ? user.contract.split(",")
         : [
-            selectStudent.attributes?.student?.data?.id + "",
-            selectStudent?.id + "",
-          ];
+          selectStudent.attributes?.student?.data?.id + "",
+          selectStudent?.id + "",
+        ];
     dispatch(
       createAsync({
         token: cookie.userToken,
@@ -116,7 +116,7 @@ function PaidContractModal({ users }) {
                         </Form.Select>
                       </>
                     ) : (
-                      <Form.Label>{`${selectStudent.attributes?.student?.data?.attributes?.First_name} ${selectStudent.attributes?.student?.data?.attributes?.Last_name}`}</Form.Label>
+                      <Form.Label>{`${selectStudent?.attributes?.student?.data?.attributes?.First_name} ${selectStudent?.attributes?.student?.data?.attributes?.Last_name}`}</Form.Label>
                     )}
                   </Form.Group>
                   <Form.Group
