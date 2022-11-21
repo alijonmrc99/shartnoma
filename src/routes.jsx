@@ -26,7 +26,6 @@ function Router() {
             <Route index element={<Monitoring />} />
             <Route path=":studentId" element={<PayedStudents />} />
           </Route>
-
           <Route path="contracts" element={<ContractTypes />}>
             <Route index element={<Navigate to="receive" />} />
             <Route path="receive" element={<Receive />} />
