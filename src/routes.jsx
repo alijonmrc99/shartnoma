@@ -12,6 +12,7 @@ import Receive from "./components/AllContracts/received";
 import NotReceive from "./components/AllContracts/notRecive";
 import Monitoring from "./pages/Monitoring";
 import PayedStudents from "./pages/PayedStudents";
+import MyProfile from "./pages/myProfile";
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
         <Route index element={<Navigate to="home" replace={true} />} />
         <Route path="home" element={<Dashboard />}>
           <Route index element={<Home />} />
+          <Route path="profile" element={<MyProfile />} />
           <Route path="students" element={<Students />} />
           <Route path="directions" element={<DirectionTypes />} />
           <Route path="monitoring" element={<Outlet />}>

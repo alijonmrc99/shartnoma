@@ -21,9 +21,13 @@ function Dashboard() {
         path: "/",
         expires: d,
       })
+      setCookies("id", res.data.id, {
+        path: "/",
+        expires: d,
+      })
       setUsername(res.data.fullName)
     });
-  }, [])
+  }, [cookie.userToken, setCookies])
 
   return (
     <div className="d-flex">

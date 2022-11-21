@@ -37,6 +37,11 @@ function Menu() {
             <i className="bi me-2 bi-pie-chart-fill"></i>To'lov monitoring
           </Link>
         </li>
+        <li>
+          <Link to="profile">
+            <i className="bi me-2 bi-pie-chart-fill"></i>Mening profilim
+          </Link>
+        </li>
       </ul>
     </nav>
   );
