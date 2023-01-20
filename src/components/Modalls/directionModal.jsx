@@ -24,10 +24,23 @@ function DireactionModal() {
 
   function handleChange(e) {
     let data = contract.attributes;
-    data = {
-      ...data,
-      [e.target.name]: e.target.value,
-    };
+    if (e.target.name === "price") {
+      console.log(parseFloat(e.target.value.replace(/,/g, '')));
+      if (e.target.value.length !== 0)
+        data = {
+          ...data,
+          [e.target.name]: parseFloat(e.target.value.replace(/,/g, '')),
+        };
+      else
+        data = {
+          ...data,
+          [e.target.name]: "",
+        };
+    } else
+      data = {
+        ...data,
+        [e.target.name]: e.target.value,
+      };
 
     setContract({
       id: contract.id,
@@ -37,21 +50,22 @@ function DireactionModal() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(contract.attributes);
     initialData.id
       ? dispatch(
-          editAsync({
-            token: cookie.userToken,
-            body: contract,
-            path: "contract-types/" + initialData.id,
-          })
-        )
+        editAsync({
+          token: cookie.userToken,
+          body: contract,
+          path: "contract-types/" + initialData.id,
+        })
+      )
       : dispatch(
-          createAsync({
-            token: cookie.userToken,
-            body: contract.attributes,
-            path: "contract-types",
-          })
-        );
+        createAsync({
+          token: cookie.userToken,
+          body: contract.attributes,
+          path: "contract-types",
+        })
+      );
 
     dispatch(directionModalTogle(false));
     setContract(initialData);
@@ -72,7 +86,6 @@ function DireactionModal() {
           <Modal.Body>
             <Container>
               <Row xs={1}>
-                {/* Fistname Input area */}
                 <Col>
                   <Form.Group
                     className="mb-3"
@@ -86,7 +99,6 @@ function DireactionModal() {
                       value={contract?.attributes?.direction}
                     />
                   </Form.Group>
-                  {/* Lastname input area */}
                   <Form.Group
                     className="mb-3"
                     controlId="exampleForm.ControlInput3"
@@ -94,9 +106,9 @@ function DireactionModal() {
                     <Form.Label>Kontrakt narxi</Form.Label>
                     <Form.Control
                       onChange={handleChange}
-                      type="number"
+                      type="text"
                       name="price"
-                      value={contract?.attributes?.price}
+                      value={contract?.attributes?.priceNumber?.length === 0 ? "" : (contract?.attributes?.price).toLocaleString()}
                     />
                   </Form.Group>
                 </Col>

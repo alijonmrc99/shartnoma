@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import ConfirmModal from "../components/Modalls/ConfirmModal";
 import DireactionModal from "../components/Modalls/directionModal";
 import DataTables from "../components/table/dataTable";
-import ToastMsg from "../components/toasts/ToastMsg";
 import {
   defaultContr,
   selectedContr,
@@ -55,7 +54,7 @@ function DirectionTypes() {
     },
     {
       name: "Kontrakt narxi",
-      selector: (row) => row.attributes.price,
+      selector: (row) => Number(row.attributes.price).toLocaleString(),
       sortable: true,
       //   width: "250px",
     },
@@ -84,7 +83,6 @@ function DirectionTypes() {
             Yo'nalish qo'shish
           </Button>
         </div>
-        <ToastMsg />
         <DataTables columns={columns} data={contracts.body.data} />
         <DireactionModal />
       </div>

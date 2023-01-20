@@ -48,7 +48,7 @@ function PayedStudent() {
     },
     {
       name: "Summasi",
-      selector: (row) => row.attributes.summa,
+      selector: (row) => Number(row.attributes.summa).toLocaleString(),
     },
     {
       name: "Izoh",
@@ -87,11 +87,11 @@ function PayedStudent() {
         </h4>
       </div>
       <div className="d-flex justify-content-between">
-        <span>Jami to'lagan: {total}</span>
+        <span>Jami to'lagan: {Number(total).toLocaleString()}</span>
         <span>
           Qolgan summasi:{" "}
-          {+selectStudent.attributes.contract_type.data.attributes.price -
-            total}
+          {Number(+selectStudent?.attributes?.contract_type.data?.attributes.price - total).toLocaleString()
+          }
         </span>
       </div>
       <DataTables columns={columns} data={data?.body?.data} />
